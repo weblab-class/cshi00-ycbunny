@@ -67,8 +67,8 @@ router.post("/function", auth.ensureLoggedIn, (req, res) => {
   leftRange: req.body.leftRange,
   rightRange: req.body.rightRange
   });
-  
   newFunction.save().then((functioninput) => res.send(functioninput));
+
   });
 
 // anything else falls to this "not found" case
