@@ -56,19 +56,19 @@ router.post("/initsocket", (req, res) => {
 // });
 router.get("/functions", (req, res) => {
   // empty selector means get all documents
-  func.find({}).then((funcs)=> res.send(funcs));
+  Func.find({}).then((funcs)=> res.send(funcs));
   });
-  
+
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
-  _id: req.functions.length,
+  //_id: "1" ,
   creator_name: "lol",
-  exp: req.user.exp,
-  leftRange: req.user.leftRange,
-  rightRange: req.user.righRange,
+  exp: req.body.exp,
+  leftRange: req.body.leftRange,
+  rightRange: req.body.rightRange
   });
   
-  newfunctioninput.save().then((functioninput) => res.send(functioninput));
+  newFunction.save().then((functioninput) => res.send(functioninput));
   });
 
 // anything else falls to this "not found" case

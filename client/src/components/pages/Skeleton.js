@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
+import SingleFunction from "../modules/SingleFunction.js";
+
 
 import { get } from "../../utilities";
 import "../../utilities.css";
@@ -15,7 +17,14 @@ class Skeleton extends Component {
     super(props);
     // Initialize Default State
     this.state = {
-      functions: [],
+      functions: [{creator_name:"he",
+        exp:"3*x",
+        leftRange:"1",
+        rightRange:"2",},
+        {creator_name:"he",
+        exp:"x^2",
+        leftRange:"0",
+        rightRange:"1",}]
     };
   }
 
@@ -50,7 +59,6 @@ class Skeleton extends Component {
     if (hasFunctions) {
       functionsList = this.state.functions.map((functionObj) => (
         <SingleFunction
-          _id={functionObj._id}
           creator_name={functionObj.creator_name}
           exp={functionObj.exp}
           leftRange={functionObj.leftRange}

@@ -7,7 +7,6 @@ import "./SingleFunction.css";
  * Card is a component for displaying content like stories
  *
  * Proptypes
- * @param {string} _id of the function
  * @param {string} creator_name
  * @param {string} exp math expression
  * @param {number} leftRange 
@@ -26,8 +25,8 @@ class Card extends Component {
   render() {
     return (
       <div >
-        <span>{this.props.exp}</span>
-        <p>x from{this.props.leftRange} to {this.props.rightRange}</p>
+        <span>y = {this.props.exp},  </span>
+        <span>x from {this.props.leftRange} to {this.props.rightRange}</span>
       </div>
     );
   }

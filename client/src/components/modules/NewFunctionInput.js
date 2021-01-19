@@ -51,7 +51,7 @@ class NewFunctionInput extends Component {
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
     event.preventDefault();
-    this.addFunction && this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange);
+    this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange);
     this.setState({
         exp: "",
         leftRange: "",
