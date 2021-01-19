@@ -3,6 +3,7 @@ import GoogleLogin, { GoogleLogout } from "react-google-login";
 import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
 
+import { get } from "../../utilities";
 import "../../utilities.css";
 import "./Skeleton.css";
 
@@ -18,8 +19,17 @@ class Skeleton extends Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "Home";
+    get("/api/functions").then((functionObjs) => {
+      let reversedFunctionObjs = functionObjs.reverse();
+      reversedFunctionObjs.map((functionObj) => {
+        this.setState({ stories: this.state.functions.concat([functionObj]) });
+      });
+    });
+  }
   // componentDidMount() {
-  //   //document.title = "Home Page";
+  //   document.title = "Home Page";
   //   get("/api/functions").then((functionObjs) => {
   //     let reversedFunctionObjs = functionObjs.reverse();
   //     reversedFunctionObjs.map((functionObj) => {
