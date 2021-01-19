@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
 import GraphingPanel from "../modules/GraphingPanel.js";
+import NewFunctionInput from "../modules/NewFunctionInput.js";
 
 import "../../utilities.css";
 import "./Skeleton.css";
@@ -12,15 +13,43 @@ class Skeleton extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
-    this.state = {};
+    this.state = {
+      functions: [],
+    };
   }
 
-  componentDidMount() {
-    // remember -- api calls go here!
-  }
+  // componentDidMount() {
+  //   //document.title = "Home Page";
+  //   get("/api/functions").then((functionObjs) => {
+  //     let reversedFunctionObjs = functionObjs.reverse();
+  //     reversedFunctionObjs.map((functionObj) => {
+  //       this.setState({ functions: this.state.functions.concat([functionObj]) });
+  //     });
+  //   });
+  // }
+
+  // addNewFunction = (functionObj) => {
+  //   this.setState({
+  //     functions: [functionObj].concat(this.state.functions),
+  //   });
+  // };
 
   render() {
-    let a = [{exp: 1, leftRange: 0, rightRange: 1}, {exp: 2, leftRange: 0, rightRange: 1}]
+    let functionsList = null;
+    const hasFunctions = this.state.functions.length !== 0;
+    if (hasFunctions) {
+      functionsList = this.state.functions.map((functionObj) => (
+        <SingleFunction
+          _id={functionObj._id}
+          creator_name={functionObj.creator_name}
+          exp={functionObj.exp}
+          leftRange={functionObj.leftRange}
+          rightRange={functionObj.rightRange}
+        />
+      ));
+    } else {
+      functionsList = <div></div>;
+    }
     return (
       <>
         <h1 class="u-textCenter">Graphiti</h1>
@@ -31,7 +60,9 @@ class Skeleton extends Component {
         <section class="u-textCenter">
           <h3>Start Creating!</h3>
         </section>
-        <GraphingPanel functions = {[{exp: "1", leftRange: 0, rightRange: 1}, {exp: "2", leftRange: 1, rightRange: 3}]}/>
+        <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
+        {functionsList}
+        <GraphingPanel functions = {this.state.functions}/>
       </>
     );
   }

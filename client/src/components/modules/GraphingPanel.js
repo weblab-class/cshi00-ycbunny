@@ -31,7 +31,7 @@ const math = create(all)
         // };
         this.props.functions.map((functionObj) => (
           brd.create('curve', [function(t){return t;},
-            function(t){return math.evaluate(functionObj.exp,{x:t});}, functionObj.leftRange, functionObj.rightRange], { strokeColor: '#aa2233', strokeWidth: 3 })
+            function(t){return math.evaluate(functionObj.exp,{x:t});}, Number(functionObj.leftRange), Number(functionObj.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
         ));
         brd.unsuspendUpdate();
       }

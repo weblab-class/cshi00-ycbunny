@@ -6,6 +6,17 @@
 | This file defines the routes for your server.
 |
 */
+const data = {
+  functions: [
+    {
+      _id: 0,
+      creator_name: "Shannen Wu",
+      exp: "x",
+      leftRange: "0",
+      rightRange: "1"
+    }
+  ],
+};
 
 const express = require("express");
 
@@ -38,9 +49,23 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
+router.get("/functions", (req, res) => {
+  // empty selector means get all documents
+  res.send(data.functions);
+});
+
+router.post("/function", (req, res) => {
+  const newFunction = {
+    _id: data.stories.length,
+    creator_name: 'lol',
+    exp: req.body.exp,
+    leftRange: req.body.leftRange,
+    rightRange: req.body.rightRange,
+  };
+
+  data.functions.push(newFunction);
+  res.send(newFunction);
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

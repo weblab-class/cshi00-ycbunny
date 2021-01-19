@@ -1,96 +1,102 @@
-// import React, { Component } from "react";
+import React, { Component } from "react";
 
-// import "./NewFunctionInput.css";
-// import { post } from "../../utilities";
+import "./NewFunctionInput.css";
+import { post } from "../../utilities";
 
-// /**
-//  * New Post is a parent component for all input components
-//  *
-//  * Proptypes
-//  * @param {string} defaultText is the placeholder text
-//  * @param {string} functionId 
-//  * @param {({functionId, value}) => void} onSubmit: (function) triggered when this post is submitted, takes {storyId, value} as parameters
-//  * @param {({functionId, value}) => void} onClear: (function) triggered when this post is submitted, takes {storyId, value} as parameters
-//  */
-// class NewPostInput extends Component {
-//   constructor(props) {
-//     super(props);
+/**
+ * New Post is a parent component for all input components
+ *
+ * Proptypes
+ * @param {string} defaultText is the placeholder text
+ * @param {({functionId, value}) => void} addNewFunction: (function) triggered when this post is submitted, takes {storyId, value} as parameters
+ */
+class NewFunctionInput extends Component {
+  constructor(props) {
+    super(props);
 
-//     this.state = {
-//       value: "",
-//     };
-//   }
+    this.state = {
+      exp: "",
+      leftRange: "",
+      rightRange:""
+    };
+  }
 
-//   // called whenever the user types in the new post input box
-//   handleChange = (event) => {
-//     this.setState({
-//       value: event.target.value,
-//     });
-//   };
+  addFunction = (a, b, c) => {
+    const body = {exp: a, leftRange: b, rightRange: c};
+    post("/api/function", body).then((func) => {
+      // display this story on the screen
+      this.props.addNewFunction(func);
+    });
+  };
 
-//   // called when the user hits "Submit" for a new post
-//   handleSubmit = (event) => {
-//     event.preventDefault();
-//     this.props.onSubmit && this.props.onSubmit(this.state.value);
-//     this.setState({
-//       value: "",
-//     });
-//   };
+  // called whenever the user types in the new post input box
+  expChange = (event) => {
+    this.setState({
+      exp: event.target.value,
+    });
+  };
 
-//   handleClear = (event) => {
-//     event.preventDefault();
-//     this.props.onClear && this.props.onClear(this.state.value);
-//   };
+  leftRangeChange = (event) => {
+    this.setState({
+      leftRange: event.target.value,
+    });
+  };
 
-//   render() {
-//     return (
-//       <div className="u-flex">
-//         <input
-//           type="text"
-//           placeholder={this.props.defaultText}
-//           value={this.state.value}
-//           onChange={this.handleChange}
-//           className="NewPostInput-input"
-//         />
-//         <button
-//           type="submit"
-//           className="NewPostInput-button u-pointer"
-//           value="Submit"
-//           onClick={this.handleSubmit}
-//         >
-//           OK
-//         </button>
-//         <button
-//           type="submit"
-//           className="NewPostInput-button u-pointer"
-//           value="Submit"
-//           onClick={this.handleClear}
-//         >
-//           Clear
-//         </button>
-//       </div>
-//     );
-//   }
-// }
+  rightRangeChange = (event) => {
+    this.setState({
+      rightRange: event.target.value,
+    });
+  };
 
-// /**
-//  * New Story is a New Post component for comments
-//  *
-//  * Proptypes
-//  * @param {string} defaultText is the placeholder text
-//  */
-// class NewStory extends Component {
-//   addStory = (value) => {
-//     const body = { content: value };
-//     post("/api/story", body).then((story) => {
-//       // display this story on the screen
-//       this.props.addNewStory(story); // ADDNEWSTORY???
-//     });
-//   };
+  // called when the user hits "Submit" for a new post
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.addFunction && this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange);
+    this.setState({
+        exp: "",
+        leftRange: "",
+        rightRange:""
+    });
+  };
 
-//   render() {
-//     return <NewPostInput defaultText="New Story" onSubmit={this.addFunction} onClear={this.deleteFunction}/>;
-//   }
-// }
+  render() {
+    return (
+      <div className="u-flex">
+        <span>y = </span>
+        <input
+          type="text"
+          placeholder={this.props.defaultText}
+          value={this.state.exp}
+          onChange={this.expChange}
+          className="NewPostInput-input"
+        />
+        <span> x from </span>
+        <input
+          type="text"
+          placeholder={this.props.defaultText}
+          value={this.state.leftRange}
+          onChange={this.leftRangeChange}
+          className="NewPostInput-input"
+        />
+        <span> to </span>
+        <input
+          type="text"
+          placeholder={this.props.defaultText}
+          value={this.state.rightRange}
+          onChange={this.rightRangeChange}
+          className="NewPostInput-input"
+        />
+        <button
+          type="submit"
+          className="NewPostInput-button u-pointer"
+          value="Submit"
+          onClick={this.handleSubmit}
+        >
+          Enter
+        </button>
+      </div>
+    );
+  }
+}
 
-// export { NewComment, NewStory };
+export default NewFunctionInput;
