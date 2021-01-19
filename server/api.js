@@ -61,14 +61,14 @@ router.get("/functions", (req, res) => {
   
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
-  _id: req.functions.length,
+  _id: 1,
   creator_name: "lol",
   exp: req.user.exp,
   leftRange: req.user.leftRange,
   rightRange: req.user.righRange,
   });
   
-  newfunctioninput.save().then((functioninput) => res.send(functioninput));
+newFunction.save().then((functioninput) => res.send(functioninput));
   });
 
 // anything else falls to this "not found" case
