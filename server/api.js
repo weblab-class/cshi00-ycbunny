@@ -6,18 +6,6 @@
 | This file defines the routes for your server.
 |
 */
-const data = {
-  functions: [
-    {
-      _id: 0,
-      creator_name: "Shannen Wu",
-      exp: "x",
-      leftRange: "0",
-      rightRange: "1"
-    }
-  ],
-};
-
 const express = require("express");
 
 // import models so we can interact with the database
@@ -28,6 +16,8 @@ const auth = require("./auth");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
+
+const Func = require("./models/functioninput");
 
 //initialize socket
 const socketManager = require("./server-socket");
@@ -49,23 +39,37 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
+// router.get("/functions", (req, res) => {
+//   // empty selector means get all documents
+//   Func.find({}).then((functions)=> res.send(functions));
+// });
+
+// router.post("/function", (req, res) => {
+//   const newFunction = new Func({
+//     _id: data.functions.length,
+//     creator_name: 'lol',
+//     exp: req.body.exp,
+//     leftRange: req.body.leftRange,
+//     rightRange: req.body.rightRange,
+//   });
+//   newFunction.save().then((func) => res.send(func));
+// });
 router.get("/functions", (req, res) => {
   // empty selector means get all documents
-  res.send(data.functions);
-});
-
-router.post("/function", (req, res) => {
-  const newFunction = {
-    _id: data.stories.length,
-    creator_name: 'lol',
-    exp: req.body.exp,
-    leftRange: req.body.leftRange,
-    rightRange: req.body.rightRange,
-  };
-
-  data.functions.push(newFunction);
-  res.send(newFunction);
-});
+  func.find({}).then((funcs)=> res.send(funcs));
+  });
+  
+router.post("/function", auth.ensureLoggedIn, (req, res) => {
+  const newFunction = new Func({
+  _id: req.functions.length,
+  creator_name: "lol",
+  exp: req.user.exp,
+  leftRange: req.user.leftRange,
+  rightRange: req.user.righRange,
+  });
+  
+  newfunctioninput.save().then((functioninput) => res.send(functioninput));
+  });
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

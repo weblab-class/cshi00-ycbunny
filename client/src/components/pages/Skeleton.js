@@ -28,11 +28,11 @@ class Skeleton extends Component {
   //   });
   // }
 
-  // addNewFunction = (functionObj) => {
-  //   this.setState({
-  //     functions: [functionObj].concat(this.state.functions),
-  //   });
-  // };
+  addNewFunction = (functionObj) => {
+    this.setState({
+      functions: [functionObj].concat(this.state.functions),
+    });
+  };
 
   render() {
     let functionsList = null;

@@ -11,9 +11,6 @@ const math = create(all)
   
 
     render () {
-      parser = (string) => {
-        return math.compile
-        };
       let logicJS = (brd) => {
         brd.suspendUpdate();
         //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
