@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
+import GraphingPanel from "../modules/GraphingPanel.js";
 
 import "../../utilities.css";
 import "./Skeleton.css";
@@ -36,6 +37,7 @@ class Skeleton extends Component {
             onFailure={(err) => console.log(err)}
           />
         )}
+        <GraphingPanel />
         <h1>Good luck on your project :)</h1>
         <h2> What we provide in this skeleton</h2>
         <ul>
