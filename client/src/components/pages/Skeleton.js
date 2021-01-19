@@ -20,6 +20,7 @@ class Skeleton extends Component {
   }
 
   render() {
+    let a = [{exp: 1, leftRange: 0, rightRange: 1}, {exp: 2, leftRange: 0, rightRange: 1}]
     return (
       <>
         {this.props.userId ? (
@@ -37,7 +38,7 @@ class Skeleton extends Component {
             onFailure={(err) => console.log(err)}
           />
         )}
-        <GraphingPanel />
+        <GraphingPanel functions = {[{exp: "1", leftRange: 0, rightRange: 1}, {exp: "2", leftRange: 1, rightRange: 3}]}/>
         <h1>Good luck on your project :)</h1>
         <h2> What we provide in this skeleton</h2>
         <ul>
