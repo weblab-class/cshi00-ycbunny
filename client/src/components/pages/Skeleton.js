@@ -33,7 +33,7 @@ class Skeleton extends Component {
     get("/api/functions").then((functionObjs) => {
       let reversedFunctionObjs = functionObjs.reverse();
       reversedFunctionObjs.map((functionObj) => {
-        this.setState({ stories: this.state.functions.concat([functionObj]) });
+        this.setState({ functions: this.state.functions.concat([functionObj]) });
       });
     });
   }
