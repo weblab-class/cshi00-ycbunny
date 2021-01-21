@@ -61,8 +61,8 @@ router.get("/functions", (req, res) => {
 
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
-  //_id: "1" ,
-  creator_name: "lol",
+  creator_id: req.user._id ,
+  creator_name: req.user.name,
   exp: req.body.exp,
   leftRange: req.body.leftRange,
   rightRange: req.body.rightRange
