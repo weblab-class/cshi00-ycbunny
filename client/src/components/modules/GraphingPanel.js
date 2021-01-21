@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import JXGBoard, { parser } from 'jsxgraph-react-js';
+import JXGBoard from './JSXGraphSrc.js'; 
+import { parser } from 'jsxgraph-react-js';
 import { create, all } from 'mathjs';
 
 // create a mathjs instance
