@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import JXGBoard from 'jsxgraph-react-js'
+import JXGBoard from '../modules/JSXGraphSrc.js'
 
 import "../../utilities.css";
 

@@ -80,7 +80,7 @@ class Skeleton extends Component {
         </section>
         <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
         {functionsList}
-        {/* <GraphingPanel functions = {this.state.functions}/> */}
+        <GraphingPanel functions = {this.state.functions}/> 
       </>
     );
   }

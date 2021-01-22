@@ -29,6 +29,14 @@ class NewFunctionInput extends Component {
     });
   };
 
+  deleteFunction = (id) => {
+    const body = {_id: id};
+    post("/api/function", body).then((func) => {
+      // display this story on the screen
+      this.props.deleteOldFunction(func);
+    });
+  };
+
   // called whenever the user types in the new post input box
   expChange = (event) => {
     this.setState({
