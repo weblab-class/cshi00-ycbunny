@@ -28,14 +28,14 @@ class NavBar extends Component {
               Create
             </Link>
           )}
-          <Link to="/create/" className="NavBar-link">
+          {/* <Link to="/create/" className="NavBar-link">
             Create
-          </Link>
+          </Link> */}
           <Link to="/gallery/" className="NavBar-link">
             Gallery
           </Link>
-          <Link to="/reference/" className="NavBar-link">
-            Reference
+          <Link to="/resource/" className="NavBar-link">
+            Resource
           </Link>
           {this.props.userId ? (
             <GoogleLogout
