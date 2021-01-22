@@ -26,7 +26,12 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "google-auth-library": "^6.1.3",
+<<<<<<< HEAD
     "jsxgraph": "^1.2.1",
+=======
+    "jsxgraph": "^0.99.7",
+    "jsxgraph-react-js": "^1.0.4",
+>>>>>>> 1916a7fff79e5981dadad970413464890d71f5ce
     "mathjs": "^9.0.0",
     "mongoose": "^5.11.9",
     "nodemon": "^2.0.6",

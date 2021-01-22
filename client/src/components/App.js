@@ -9,6 +9,9 @@ import "../utilities.css";
 import { socket } from "../client-socket.js";
 
 import { get, post } from "../utilities";
+import Create from "./pages/Create.js";
+import Gallery from "./pages/Gallery.js";
+import Resource from "./pages/Resource.js";
 
 /**
  * Define the "App" component as a class.
@@ -60,6 +63,22 @@ class App extends Component {
             handleLogout={this.handleLogout}
             userId={this.state.userId}
           />
+          <Create
+           path="/create/:userId"
+           handleLogin={this.handleLogin}
+           handleLogout={this.handleLogout}
+           userId={this.state.userId}
+          />
+          <Gallery
+           path="/gallery/"
+           userId={this.state.userId}
+          />
+
+          <Resource
+           path="/resource/"
+           userId={this.state.userId}
+          />
+
           <NotFound default />
         </Router>
       </>

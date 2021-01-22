@@ -51,6 +51,7 @@
 //       <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
 //     )
 //   }
+<<<<<<< HEAD
 // }
 
 import React, { Component } from 'react';
@@ -96,3 +97,6 @@ export class JXGBoard extends Component {
 }
 
 export default JXGBoard;
+=======
+// }
+>>>>>>> 1916a7fff79e5981dadad970413464890d71f5ce
