@@ -24,21 +24,9 @@ class Skeleton extends Component {
   componentDidMount() {
     document.title = "Home";
     get("/api/functions").then((functionObjs) => {
-      let reversedFunctionObjs = functionObjs.reverse();
-      reversedFunctionObjs.map((functionObj) => {
-        this.setState({ functions: this.state.functions.concat([functionObj]) });
-      });
+      this.setState({ functions: functionObjs.reverse() });
     });
   }
-  // componentDidMount() {
-  //   document.title = "Home Page";
-  //   get("/api/functions").then((functionObjs) => {
-  //     let reversedFunctionObjs = functionObjs.reverse();
-  //     reversedFunctionObjs.map((functionObj) => {
-  //       this.setState({ functions: this.state.functions.concat([functionObj]) });
-  //     });
-  //   });
-  // }
 
   addNewFunction = (functionObj) => {
     this.setState({
@@ -82,8 +70,6 @@ class Skeleton extends Component {
         </section>
         <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
         {functionsList}
-        {console.log(functionsList)}
-        {console.log(this.state.functions)}
         <GraphingPanel functions = {this.state.functions}/> 
       </>
     );

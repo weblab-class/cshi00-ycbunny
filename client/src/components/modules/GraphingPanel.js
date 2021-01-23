@@ -1,46 +1,46 @@
 import React, { Component } from "react";
-import JXGBoardU from './JSXGraphUSrc.js'; 
 import { create, all } from 'mathjs';
+import JXG from 'jsxgraph';
+import assign from 'lodash/assign'
 
 const math = create(all)
   class GraphingPanel extends Component {
     constructor(props) {
       super(props);
-      };
+      this.id = 'board_' + Math.random().toString(36).substr(2, 9)
+      this.state = { board: null,  initialGraphingFinished: false}
+      this.defaultStyle = { width: 500, height: 500 }
+      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10] }
+    };
   
+    componentDidMount() {
+      // now that div exists, create new JSXGraph board with it
+      let attributes = {}
+      Object.assign(attributes, this.defauflboardAttributes, this.props.boardAttributes || {})
+      let board = JXG.JSXGraph.initBoard(this.id, attributes)
+      board.suspendUpdate();
+      this.setState({
+        board: board
+      })
+    }
 
-      render () {
-        let logicJS = (brd) => {
-          brd.suspendUpdate();
-          //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-          //var b = brd.create('slider', [[2, 7], [6, 7], [0, 2, 6]], { name: 'b' });
-          //var A = brd.create('slider', [[2, 6], [6, 6], [0, 3, 6]], { name: 'A' });
-          //var B = brd.create('slider', [[2, 5], [6, 5], [0, 3, 6]], { name: 'B' });
-          //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
-          //var i;
-          //this.props.functions.length
-          // for (i = 0; i < this.props.functions.length; i++) { 
-          //       let ii = i;
-          //       setTimeout(function(){
-          //         brd.create('functiongraph', [function(x){return ii*x;}, 2, 5], { strokeColor: '#aa2233', strokeWidth: 3, fixed: true}, );
-          //         },100);
-          // };
-          this.props.functions.map((functionObj) => (
-            brd.create('curve', [function(t){return t;},
-              function(t){return math.evaluate(functionObj.exp,{x:t});}, Number(functionObj.leftRange), Number(functionObj.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
-          ));
-          brd.unsuspendUpdate();
-        }
-        return (
-          <>
-            <JXGBoardU
-              logic={logicJS}
-              boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
-              style={{
-                border: "3px solid red"
-              }}
-            />
-          </>
+    render () {
+      let style = assign(this.defaultStyle, this.props.style || {})
+      if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
+        this.state.board.suspendUpdate();
+        this.props.functions.map((functionObj) => (
+        this.state.board.create('curve', [function(t){return t;},
+        function(t){return math.evaluate(functionObj.exp,{x:t});}, Number(functionObj.leftRange), Number(functionObj.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
+        ));
+        this.state.board.unsuspendUpdate();
+        this.setState({
+          initialGraphingFinished:true
+        })
+      }
+      return (
+        <>
+          <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
+        </>
         )
       }
     }
