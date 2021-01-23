@@ -17,14 +17,7 @@ class Skeleton extends Component {
     super(props);
     // Initialize Default State
     this.state = {
-      functions: [{creator_name:"he",
-        exp:"3*x",
-        leftRange:"1",
-        rightRange:"2",},
-        {creator_name:"he",
-        exp:"x^2",
-        leftRange:"0",
-        rightRange:"1",}]
+      functions: []
     };
   }
 
@@ -53,16 +46,25 @@ class Skeleton extends Component {
     });
   };
 
+  deleteOldFunction = (id) => {
+    this.setState({
+      functions: this.state.functions.filter((functionObj) => (
+        functionObj._id!=id))
+    });
+  };
+
   render() {
     let functionsList = null;
     const hasFunctions = this.state.functions.length !== 0;
     if (hasFunctions) {
       functionsList = this.state.functions.map((functionObj) => (
         <SingleFunction
+          _id={functionObj._id}
           creator_name={functionObj.creator_name}
           exp={functionObj.exp}
           leftRange={functionObj.leftRange}
           rightRange={functionObj.rightRange}
+          deleteOldFunction={this.deleteOldFunction}
         />
       ));
     } else {
@@ -80,6 +82,8 @@ class Skeleton extends Component {
         </section>
         <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
         {functionsList}
+        {console.log(functionsList)}
+        {console.log(this.state.functions)}
         <GraphingPanel functions = {this.state.functions}/> 
       </>
     );

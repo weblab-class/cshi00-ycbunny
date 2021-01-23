@@ -19,6 +19,7 @@ const router = express.Router();
 
 const Func = require("./models/functioninput");
 
+const ObjectId = require('mongodb').ObjectID;
 //initialize socket
 const socketManager = require("./server-socket");
 
@@ -54,9 +55,9 @@ router.post("/initsocket", (req, res) => {
 //   });
 //   newFunction.save().then((func) => res.send(func));
 // });
-router.get("/functions", (req, res) => {
+router.get("/functions", auth.ensureLoggedIn, (req, res) => {
   // empty selector means get all documents
-  Func.find({}).then((funcs)=> res.send(funcs));
+  Func.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs));
   });
 
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
@@ -69,6 +70,10 @@ router.post("/function", auth.ensureLoggedIn, (req, res) => {
   });
   newFunction.save().then((functioninput) => res.send(functioninput));
 
+  });
+
+router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
+  Func.deleteOne({_id:ObjectId(req.body.id)}).then((student) => console.log(req.body.id));
   });
 
 // anything else falls to this "not found" case
