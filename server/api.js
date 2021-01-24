@@ -19,6 +19,8 @@ const router = express.Router();
 
 const Func = require("./models/functioninput");
 
+const fs = require('fs');
+
 const ObjectId = require('mongodb').ObjectID;
 //initialize socket
 const socketManager = require("./server-socket");
@@ -76,6 +78,13 @@ router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
   Func.deleteOne({_id:ObjectId(req.body.id)}).then((student) => console.log(req.body.id));
   });
 
+router.post("/saveImage", auth.ensureLoggedIn, (req, res) => {
+  var image = req.body.board;
+  var data = image.replace(/^data:image\/\w+;base64,/, '');
+  fs.writeFile("out.png", data, {encoding: 'base64'}, function(err){
+    console.log(err);
+  });
+});
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { create, all } from 'mathjs';
 import JXG from 'jsxgraph';
-import assign from 'lodash/assign'
+import assign from 'lodash/assign';
+import { post } from "../../utilities";
 
 const math = create(all)
   class GraphingPanel extends Component {
@@ -10,7 +11,7 @@ const math = create(all)
       this.id = 'board_' + Math.random().toString(36).substr(2, 9)
       this.state = { board: null,  initialGraphingFinished: false}
       this.defaultStyle = { width: 500, height: 500 }
-      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10] }
+      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10], showScreenshot: true,  renderer: 'canvas' }
       this.curveDic = {}
     };
   
@@ -18,12 +19,23 @@ const math = create(all)
       // now that div exists, create new JSXGraph board with it
       let attributes = {}
       Object.assign(attributes, this.defauflboardAttributes, this.props.boardAttributes || {})
+      JXG.JSXGraph.renderer = 'canvas';
       let board = JXG.JSXGraph.initBoard(this.id, attributes)
       board.suspendUpdate();
       this.setState({
         board: board
       })
     }
+
+    saveImage = (board) => {
+      post("/api/saveImage", {board: board,}).then((img) => (console.log(img)));
+    };
+  
+    handleSave = (event) => {
+      event.preventDefault();
+      console.log(this.state.board);
+      this.saveImage(this.state.board.renderer.canvasRoot.toDataURL());
+    };
 
     render () {
       let style = assign(this.defaultStyle, this.props.style || {})
@@ -33,10 +45,13 @@ const math = create(all)
         this.curveDic[functionObj._id] = this.state.board.create('curve', [function(t){return t;},
           function(t){return math.evaluate(functionObj.exp,{x:t});}, Number(functionObj.leftRange), Number(functionObj.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
         ));
-        this.state.board.unsuspendUpdate();
+        this.state.board.unsuspendUpdate()
         this.setState({
           initialGraphingFinished:true
         })
+        //console.log(XMLSerializer().serializeToString(board.renderer.svgRoot););
+        //console.log(JXG.SVGRenderer.screenshot(this.state.board));
+        let pic = this.state.board.renderer.canvasRoot.toDataURL();
       }
       if (this.state.initialGraphingFinished ===true){
         let currentCurves = Object.keys(this.curveDic);
@@ -58,6 +73,14 @@ const math = create(all)
       return (
         <>
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
+          <button
+          type="submit"
+          className="NewPostInput-button u-pointer"
+          value="Submit"
+          onClick={this.handleSave}
+        >
+        Save
+        </button>
         </>
         )
       }
