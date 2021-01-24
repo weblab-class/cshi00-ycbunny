@@ -1,0 +1,9 @@
+.Resource-graph{
+    border: var(--lightgrey) 2px solid;
+    border-radius: var(--s);
+    margin: var(--l);
+}
+
+.Resource-title{
+    padding: var(--s) var(--m)
+}
