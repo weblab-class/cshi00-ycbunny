@@ -3,6 +3,7 @@ import NavBar from "./modules/NavBar.js";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
+import Draw from "./pages/Draw.js";
 
 import "../utilities.css";
 
@@ -79,6 +80,12 @@ class App extends Component {
            userId={this.state.userId}
           />
 
+          <Draw
+            path="/draw/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
           <NotFound default />
         </Router>
       </>
