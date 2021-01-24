@@ -58,8 +58,17 @@ form {
   flex-direction: column;
 }
 
+.u-flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
 .u-flex-justifyCenter {
   justify-content: center;
+}
+
+.u-flexWrap{
+  flex-wrap: wrap;
 }
 
 .u-flex-alignCenter {
