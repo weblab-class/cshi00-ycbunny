@@ -28,12 +28,11 @@ const math = create(all)
     }
 
     saveImage = (board) => {
-      post("/api/saveImage", {board: board,}).then((img) => (console.log(img)));
+      post("/api/saveImage", {board: board,});
     };
   
     handleSave = (event) => {
       event.preventDefault();
-      console.log(this.state.board);
       this.saveImage(this.state.board.renderer.canvasRoot.toDataURL());
     };
 
@@ -49,8 +48,6 @@ const math = create(all)
         this.setState({
           initialGraphingFinished:true
         })
-        //console.log(XMLSerializer().serializeToString(board.renderer.svgRoot););
-        //console.log(JXG.SVGRenderer.screenshot(this.state.board));
         let pic = this.state.board.renderer.canvasRoot.toDataURL();
       }
       if (this.state.initialGraphingFinished ===true){
@@ -59,7 +56,6 @@ const math = create(all)
           functionObj._id
           ));
         let newCurve = this.props.functions.filter((functionObj) => (this.curveDic[functionObj._id]==null));
-        console.log(newCurve)
         let remove = currentCurves.filter(f => !newCurves.includes(f))
         if (newCurve !== null && newCurve.length !== 0){
           this.curveDic[newCurve[0]._id] = this.state.board.create('curve', [function(t){return t;},

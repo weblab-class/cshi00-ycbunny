@@ -19,9 +19,13 @@ const router = express.Router();
 
 const Func = require("./models/functioninput");
 
+const FunctionFinishedImg = require("./models/functionFinishedImg");
+
 const fs = require('fs');
 
 const ObjectId = require('mongodb').ObjectID;
+
+const mongodb = require('mongodb');
 //initialize socket
 const socketManager = require("./server-socket");
 
@@ -42,24 +46,16 @@ router.post("/initsocket", (req, res) => {
   res.send({});
 });
 
-// router.get("/functions", (req, res) => {
-//   // empty selector means get all documents
-//   Func.find({}).then((functions)=> res.send(functions));
-// });
-
-// router.post("/function", (req, res) => {
-//   const newFunction = new Func({
-//     _id: data.functions.length,
-//     creator_name: 'lol',
-//     exp: req.body.exp,
-//     leftRange: req.body.leftRange,
-//     rightRange: req.body.rightRange,
-//   });
-//   newFunction.save().then((func) => res.send(func));
-// });
 router.get("/functions", auth.ensureLoggedIn, (req, res) => {
   // empty selector means get all documents
   Func.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs));
+  });
+
+router.get("/works", (req, res) => {
+  // empty selector means get all documents
+  FunctionFinishedImg.find({}).then((funcs)=> res.send(funcs.map((func) => {
+    return {creator_name: func.creator_name, data: func.data.toString('base64') }})
+   )); 
   });
 
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
@@ -80,11 +76,23 @@ router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
 
 router.post("/saveImage", auth.ensureLoggedIn, (req, res) => {
   var image = req.body.board;
+  var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
+  const img = new FunctionFinishedImg({
+    creator_id: req.user._id ,
+    creator_name: req.user.name,
+    data: data,
+  })
+  img.save()
+});
+
+router.post("/download", auth.ensureLoggedIn, (req, res) => {
+  var image = req.body.board;
   var data = image.replace(/^data:image\/\w+;base64,/, '');
   fs.writeFile("out.png", data, {encoding: 'base64'}, function(err){
     console.log(err);
   });
 });
+
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
