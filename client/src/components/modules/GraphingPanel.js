@@ -28,7 +28,7 @@ const math = create(all)
     }
 
     saveImage = (board) => {
-      post("/api/saveImage", {board: board,});
+      post("/api/saveBoard", {functions: this.props.functions});
     };
   
     handleSave = (event) => {
