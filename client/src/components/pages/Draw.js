@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { Redirect } from "@reach/router";
 import "../../utilities.css";
 import { render } from "react-dom";
 import CanvasDraw from "react-canvas-draw";
 import classNames from "./Draw.css";
 import { CirclePicker } from 'react-color';
+import { get } from "../../utilities";
 
 
 class Draw extends Component {
@@ -13,9 +15,18 @@ class Draw extends Component {
     height: 400,
     brushRadius: 10,
     lazyRadius: 0,
+    background: null,
   };
   componentDidMount() {
-    // let's change the color randomly every 2 seconds. fun!
+    let background = sessionStorage.getItem("image");
+    // if (background == null){
+    //   background = localStorage.getItem("workId");
+    //   get("/api/imageforcoloring", {workId: localStorage.getItem('workId')}).then((img) => {
+    //   background = `data:image/png;base64,${img.data}`
+    //   console.log(background)
+    //   });
+    // }
+    this.setState({ background: background});
   }
 
   handleChangeComplete = (color, event) => {
@@ -100,34 +111,9 @@ class Draw extends Component {
           canvasWidth={this.state.width}
           canvasHeight={this.state.height}
           erase={this.state.erase}
+          imgSrc = {this.state.background}
+          saveData = {localStorage.getItem("savedDrawing")}
         />
-        <p>
-          The following is a disabled canvas with a hidden grid that we use to
-          load & show your saved drawing.
-        </p>
-        <button
-          onClick={() => {
-            this.loadableCanvas.loadSaveData(
-              localStorage.getItem("savedDrawing")
-            );
-          }}
-        >
-          Load what you saved previously into the following canvas. Either by
-          calling `loadSaveData()` on the component's reference or passing it
-          the `saveData` prop:
-        </button>
-        <CanvasDraw
-          disabled
-          hideGrid
-          ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
-          saveData={localStorage.getItem("savedDrawing")}
-        />
-        <p>
-          The saving & loading also takes different dimensions into account.
-          Change the width & height, draw something and save it and then load it
-          into the disabled canvas. It will load your previously saved
-          masterpiece scaled to the current canvas dimensions.
-        </p>
       </div>
     );
   }

@@ -29,6 +29,7 @@ const mongodb = require('mongodb');
 //initialize socket
 const socketManager = require("./server-socket");
 
+
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -48,7 +49,7 @@ router.post("/initsocket", (req, res) => {
 
 router.get("/functions", auth.ensureLoggedIn, (req, res) => {
   // empty selector means get all documents
-  Func.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs));
+  Func.find({creator_id: req.user._id, workId: req.query.workId}).then((funcs)=> res.send(funcs));
   });
 
 router.get("/works", (req, res) => {
@@ -58,13 +59,21 @@ router.get("/works", (req, res) => {
    )); 
   });
 
+router.get("/myworks", (req, res) => {
+  // empty selector means get all documents
+  FunctionFinishedImg.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
+    return {creator_name: func.creator_name, data: func.data.toString('base64'), workId: func.workId }})
+    )); 
+  });
+
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
   creator_id: req.user._id ,
   creator_name: req.user.name,
   exp: req.body.exp,
   leftRange: req.body.leftRange,
-  rightRange: req.body.rightRange
+  rightRange: req.body.rightRange,
+  workId: req.body.workId
   });
   newFunction.save().then((functioninput) => res.send(functioninput));
 
@@ -74,7 +83,19 @@ router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
   Func.deleteOne({_id:ObjectId(req.body.id)}).then((student) => console.log(req.body.id));
   });
 
-router.post("/saveImage", auth.ensureLoggedIn, (req, res) => {
+router.post("/saveBoard", auth.ensureLoggedIn, (req, res) => {
+  var image = req.body.board;
+  var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
+  const img = new FunctionFinishedImg({
+    creator_id: req.user._id ,
+    creator_name: req.user.name,
+    data: data,
+    workId: req.body.workId
+  })
+  img.save()
+});
+
+router.post("/publish", auth.ensureLoggedIn, (req, res) => {
   var image = req.body.board;
   var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
   const img = new FunctionFinishedImg({
@@ -84,6 +105,14 @@ router.post("/saveImage", auth.ensureLoggedIn, (req, res) => {
   })
   img.save()
 });
+
+router.get("/imageforcoloring", (req, res) => {
+  // empty selector means get all documents
+  FunctionFinishedImg.find({creator_id:req.user._id, workId:req.body._workId}).then((img)=> res.send(
+    {data: img.data.toString('base64') }
+    )) 
+});
+
 
 router.post("/download", auth.ensureLoggedIn, (req, res) => {
   var image = req.body.board;

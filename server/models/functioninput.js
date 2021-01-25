@@ -7,6 +7,7 @@ const FunctionInputSchema = new mongoose.Schema({
     exp: String,
     leftRange: String,
     rightRange: String,
+    workId: String,
 });
 
 // compile model from schema

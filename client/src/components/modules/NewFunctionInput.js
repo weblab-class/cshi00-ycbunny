@@ -21,8 +21,8 @@ class NewFunctionInput extends Component {
     };
   }
 
-  addFunction = (a, b, c) => {
-    const body = {exp: a, leftRange: b, rightRange: c};
+  addFunction = (a, b, c, d) => {
+    const body = {exp: a, leftRange: b, rightRange: c, workId: d};
     post("/api/function", body).then((func) => {
       // display this story on the screen
       this.props.addNewFunction(func);
@@ -51,7 +51,7 @@ class NewFunctionInput extends Component {
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
     event.preventDefault();
-    this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange);
+    this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange, this.props.workId);
     this.setState({
         exp: "",
         leftRange: "",

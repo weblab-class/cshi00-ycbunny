@@ -68,9 +68,6 @@ class Skeleton extends Component {
         <section class="u-textCenter">
          <a href="/create/:userId" className="Get-started">Start Creating!</a>
         </section>
-        {/* <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
-        {functionsList} */}
-        {/* <GraphingPanel functions = {this.state.functions}/>  */}
     </div>
       </>
     );

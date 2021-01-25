@@ -13,14 +13,20 @@ class Create extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
+    let workId = localStorage.getItem('workId');
+    if (workId == null){
+      localStorage.setItem('workId', "0");
+      workId = "0";
+    }
     this.state = {
+      workId: workId,
       functions: []
     };
   }
 
   componentDidMount() {
-    document.title = "Home";
-    get("/api/functions").then((functionObjs) => {
+    console.log(this.state.workId);
+    get("/api/functions", {workId: this.state.workId}).then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });
   }
@@ -46,6 +52,7 @@ class Create extends Component {
         <SingleFunction
           _id={functionObj._id}
           creator_name={functionObj.creator_name}
+          workId = {functionObj.workId}
           exp={functionObj.exp}
           leftRange={functionObj.leftRange}
           rightRange={functionObj.rightRange}
@@ -61,6 +68,7 @@ class Create extends Component {
           <h1>Let's start creating!</h1>
           <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito) :D.</p>
        </div>
+<<<<<<< HEAD
        <div className="page-layout">
         <div className="graph-panel">
         <GraphingPanel functions = {this.state.functions}/> 
@@ -70,6 +78,11 @@ class Create extends Component {
         {functionsList}
         </div>
        </div>
+=======
+        <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} /> 
+        {functionsList}
+        <GraphingPanel functions = {this.state.functions} workId ={this.state.workId}/> 
+>>>>>>> 694ee0d2c5681805ecbfba6776aa463f4b61c23d
       </>
     );
   }

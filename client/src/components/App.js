@@ -13,6 +13,7 @@ import { get, post } from "../utilities";
 import Create from "./pages/Create.js";
 import Gallery from "./pages/Gallery.js";
 import Resource from "./pages/Resource.js";
+import MyWorks from "./pages/MyWorks.js";
 
 /**
  * Define the "App" component as a class.
@@ -65,7 +66,7 @@ class App extends Component {
             userId={this.state.userId}
           />
           <Create
-           path="/create/:userId"
+           path="/create/"
            handleLogin={this.handleLogin}
            handleLogout={this.handleLogout}
            userId={this.state.userId}
@@ -86,6 +87,12 @@ class App extends Component {
 
           <Draw
             path="/draw/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
+          <MyWorks
+            path="/myworks/"
             handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
             userId={this.state.userId}

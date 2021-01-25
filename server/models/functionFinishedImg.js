@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const FunctionFinishedImgSchema = new mongoose.Schema({
     creator_id: String,
     creator_name: String,
+    workId: String,
     data: Buffer,
 });
 
