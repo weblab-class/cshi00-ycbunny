@@ -57,13 +57,19 @@ class Create extends Component {
     }
     return (
       <>
-       <div>
+       <div className="Create-title">
           <h1>Let's start creating!</h1>
-          <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito):D.</p>
+          <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito) :D.</p>
        </div>
+       <div className="page-layout">
+        <div className="graph-panel">
+        <GraphingPanel functions = {this.state.functions}/> 
+        </div>
+        <div className="function-input">
         <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
         {functionsList}
-        <GraphingPanel functions = {this.state.functions}/> 
+        </div>
+       </div>
       </>
     );
   }

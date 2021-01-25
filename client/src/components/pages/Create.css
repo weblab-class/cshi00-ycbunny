@@ -1,0 +1,23 @@
+.Create-title{
+    padding: var(--s) var(--m)
+}
+.page-layout{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.graph-panel{
+    border: var(--lightgrey) 2px solid;
+    border-radius: var(--s);;
+    flex-shrink: .25;
+}
+.function-input{
+    display:flex;
+    flex-direction: column;
+    float: shrink 0.25;
+
+}
+
+
+
+
