@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "@reach/router";
 import { create, all } from 'mathjs';
 import JXG from 'jsxgraph';
 import assign from 'lodash/assign';
@@ -13,6 +14,7 @@ const math = create(all)
       this.defaultStyle = { width: 500, height: 500 }
       this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10], showScreenshot: true,  renderer: 'canvas' }
       this.curveDic = {}
+      this.redirect = false
     };
   
     componentDidMount() {
@@ -28,15 +30,20 @@ const math = create(all)
     }
 
     saveImage = (board) => {
-      post("/api/saveBoard", {functions: this.props.functions});
+      post("/api/saveBoard", {board: board});
     };
   
-    handleSave = (event) => {
-      event.preventDefault();
-      this.saveImage(this.state.board.renderer.canvasRoot.toDataURL());
+    handleSave = () => {
+      const base64 = this.state.board.renderer.canvasRoot.toDataURL()
+      sessionStorage.setItem("image", base64);
+      this.saveImage(base64);
+      this.setState({redirect: true});
     };
 
     render () {
+      if (this.state.redirect){
+        return <Redirect push to="/draw"/>;
+      }
       let style = assign(this.defaultStyle, this.props.style || {})
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
         this.state.board.suspendUpdate();
@@ -75,7 +82,7 @@ const math = create(all)
           value="Submit"
           onClick={this.handleSave}
         >
-        Save
+        Save & Continue to Coloring
         </button>
         </>
         )

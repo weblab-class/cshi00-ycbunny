@@ -68,9 +68,6 @@ class Skeleton extends Component {
         <section class="u-textCenter">
           <h3>Start Creating!</h3>
         </section>
-        {/* <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
-        {functionsList}
-        <GraphingPanel functions = {this.state.functions}/>  */}
       </main>
       </>
     );

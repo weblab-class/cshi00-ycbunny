@@ -59,6 +59,13 @@ router.get("/works", (req, res) => {
    )); 
   });
 
+router.get("/myworks", (req, res) => {
+  // empty selector means get all documents
+  FunctionFinishedImg.find({creator_id: req.user._id, workId: req.body.workId}).then((funcs)=> res.send(funcs.map((func) => {
+    return {creator_name: func.creator_name, data: func.data.toString('base64') }})
+    )); 
+  });
+  
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
   creator_id: req.user._id ,
@@ -77,13 +84,15 @@ router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
   });
 
 router.post("/saveBoard", auth.ensureLoggedIn, (req, res) => {
-  var functions = req.body.functions;
-  const brd = new Board({
+  var image = req.body.board;
+  var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
+  const img = new FunctionFinishedImg({
     creator_id: req.user._id ,
     creator_name: req.user.name,
-    functions: functions,
+    data: data,
+    workId: req.body.workId
   })
-  brd.save().then(() => console.log("saved successfully!"));
+  img.save()
 });
 
 router.post("/publish", auth.ensureLoggedIn, (req, res) => {
@@ -96,6 +105,14 @@ router.post("/publish", auth.ensureLoggedIn, (req, res) => {
   })
   img.save()
 });
+
+router.get("imageforcoloring", (req, res) => {
+  // empty selector means get all documents
+  FunctionFinishedImg.find({creator_id:req.user._id, workId:req.body._workId}).then((img)=> res.send(
+    {data: img.data.toString('base64') }
+    )) 
+});
+
 
 router.post("/download", auth.ensureLoggedIn, (req, res) => {
   var image = req.body.board;
