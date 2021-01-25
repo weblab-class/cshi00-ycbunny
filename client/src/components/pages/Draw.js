@@ -12,7 +12,7 @@ class Draw extends Component {
     width: 400,
     height: 400,
     brushRadius: 10,
-    lazyRadius: 0
+    lazyRadius: 0,
   };
   componentDidMount() {
     // let's change the color randomly every 2 seconds. fun!
@@ -83,14 +83,23 @@ class Draw extends Component {
               }
             />
           </div>
+          <button
+          onClick={() => {
+            this.setState({ color: "#FFFFFF"}
+            );
+          }}
+        > Eraser
+        </button>  
         </div>
         <CanvasDraw
+          hideGrid
           ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
           brushColor={this.state.color}
           brushRadius={this.state.brushRadius}
           lazyRadius={this.state.lazyRadius}
           canvasWidth={this.state.width}
           canvasHeight={this.state.height}
+          erase={this.state.erase}
         />
         <p>
           The following is a disabled canvas with a hidden grid that we use to
