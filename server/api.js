@@ -65,7 +65,7 @@ router.get("/myworks", (req, res) => {
     return {creator_name: func.creator_name, data: func.data.toString('base64') }})
     )); 
   });
-  
+
 router.post("/function", auth.ensureLoggedIn, (req, res) => {
   const newFunction = new Func({
   creator_id: req.user._id ,
@@ -106,7 +106,7 @@ router.post("/publish", auth.ensureLoggedIn, (req, res) => {
   img.save()
 });
 
-router.get("imageforcoloring", (req, res) => {
+router.get("/imageforcoloring", (req, res) => {
   // empty selector means get all documents
   FunctionFinishedImg.find({creator_id:req.user._id, workId:req.body._workId}).then((img)=> res.send(
     {data: img.data.toString('base64') }

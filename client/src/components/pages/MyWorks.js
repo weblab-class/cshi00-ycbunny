@@ -16,9 +16,11 @@ class MyWorks extends Component {
 
   handleColor = (workId) => {
     localStorage.setItem("workId", workId);
+    localStorage.removeItem('savedDrawing');
+    sessionStorage.clear();
     this.setState({redirect: "color"});
   };
-  handleEdit = () => {
+  handleEdit = (workId) => {
     localStorage.setItem("workId", workId);
     this.setState({redirect: "edit"});
   };
@@ -33,7 +35,7 @@ class MyWorks extends Component {
   }
   render() {
     if (this.state.redirect === "color"){
-        return <Redirect push to="/color"/>;
+        return <Redirect push to="/draw"/>;
       }
     if (this.state.redirect === "edit"){
         return <Redirect push to="/create"/>;
