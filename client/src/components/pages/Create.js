@@ -14,9 +14,9 @@ class Create extends Component {
     super(props);
     // Initialize Default State
     let workId = localStorage.getItem('workId');
-    if (workId === null){
+    if (workId == null){
       localStorage.setItem('workId', "0");
-      workId = 0;
+      workId = "0";
     }
     this.state = {
       workId: workId,
@@ -25,7 +25,8 @@ class Create extends Component {
   }
 
   componentDidMount() {
-    get("/api/functions").then((functionObjs) => {
+    console.log(this.state.workId);
+    get("/api/functions", {workId: this.state.workId}).then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });
   }
@@ -67,9 +68,9 @@ class Create extends Component {
           <h1>Let's start creating!</h1>
           <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito):D.</p>
        </div>
-        <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} workId={this.state.workId} /> 
+        <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} /> 
         {functionsList}
-        <GraphingPanel functions = {this.state.functions}/> 
+        <GraphingPanel functions = {this.state.functions} workId ={this.state.workId}/> 
       </>
     );
   }

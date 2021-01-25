@@ -19,12 +19,13 @@ class Draw extends Component {
   };
   componentDidMount() {
     let background = sessionStorage.getItem("image");
-    if (background === null){
-      background = localStorage.getItem("workId");
-      get("/api/imageforcoloring", {workId: localStorage.getItem('workId')}).then((img) => {
-      background = `data:image/png;base64,${img.data}`
-      });
-    }
+    // if (background == null){
+    //   background = localStorage.getItem("workId");
+    //   get("/api/imageforcoloring", {workId: localStorage.getItem('workId')}).then((img) => {
+    //   background = `data:image/png;base64,${img.data}`
+    //   console.log(background)
+    //   });
+    // }
     this.setState({ background: background});
   }
 

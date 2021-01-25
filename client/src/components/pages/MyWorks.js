@@ -14,19 +14,19 @@ class MyWorks extends Component {
     }
   }
 
-  handleColor = (workId) => {
-    localStorage.setItem("workId", workId);
+  handleColor = (e) => {
+    localStorage.setItem("workId", e.target.value.workID);
     localStorage.removeItem('savedDrawing');
-    sessionStorage.clear();
+    sessionStorage.setItem("image", `data:image/png;base64,${e.target.value.image}`);
     this.setState({redirect: "color"});
   };
   handleEdit = (workId) => {
-    localStorage.setItem("workId", workId);
+    localStorage.setItem("workId", workId.target.value);
     this.setState({redirect: "edit"});
   };
   componentDidMount() {
     document.title = "My Works";
-    get("/api/myworks", localStorage.getItem('workId')).then((workObjs) => {
+    get("/api/myworks").then((workObjs) => {
       let reversedWorkObjs = workObjs.reverse();
       reversedWorkObjs.map((workObj) => {
         this.setState({ works: this.state.works.concat([workObj]) });
@@ -34,6 +34,7 @@ class MyWorks extends Component {
     });
   }
   render() {
+    console.log(this.state.works)
     if (this.state.redirect === "color"){
         return <Redirect push to="/draw"/>;
       }
@@ -57,7 +58,7 @@ class MyWorks extends Component {
             <button
                 type="submit"
                 className="NewPostInput-button u-pointer"
-                value= {workObj.workId}
+                value= {{workId: workObj.workId, image: workObj.data}}
                 onClick={this.handleColor}
                 >
                 Color

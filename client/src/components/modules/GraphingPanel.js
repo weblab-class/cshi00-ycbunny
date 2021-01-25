@@ -30,7 +30,8 @@ const math = create(all)
     }
 
     saveImage = (board) => {
-      post("/api/saveBoard", {board: board});
+      console.log(this.props.workId);
+      post("/api/saveBoard", {board: board, workId: this.props.workId});
     };
   
     handleSave = () => {

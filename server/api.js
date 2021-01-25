@@ -49,7 +49,7 @@ router.post("/initsocket", (req, res) => {
 
 router.get("/functions", auth.ensureLoggedIn, (req, res) => {
   // empty selector means get all documents
-  Func.find({creator_id: req.user._id, workId: req.body.workId}).then((funcs)=> res.send(funcs));
+  Func.find({creator_id: req.user._id, workId: req.query.workId}).then((funcs)=> res.send(funcs));
   });
 
 router.get("/works", (req, res) => {
@@ -61,8 +61,8 @@ router.get("/works", (req, res) => {
 
 router.get("/myworks", (req, res) => {
   // empty selector means get all documents
-  FunctionFinishedImg.find({creator_id: req.user._id, workId: req.body.workId}).then((funcs)=> res.send(funcs.map((func) => {
-    return {creator_name: func.creator_name, data: func.data.toString('base64') }})
+  FunctionFinishedImg.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
+    return {creator_name: func.creator_name, data: func.data.toString('base64'), workId: func.workId }})
     )); 
   });
 
