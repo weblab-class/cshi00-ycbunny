@@ -72,11 +72,15 @@ class App extends Component {
           />
           <Gallery
            path="/gallery/"
+           handleLogin={this.handleLogin}
+           handleLogout={this.handleLogout}
            userId={this.state.userId}
           />
 
           <Resource
            path="/resource/"
+           handleLogin={this.handleLogin}
+           handleLogout={this.handleLogout}
            userId={this.state.userId}
           />
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
 import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
 import SingleFunction from "../modules/SingleFunction.js";
@@ -60,17 +59,19 @@ class Skeleton extends Component {
     }
     return (
       <>
-        <h1 class="u-textCenter">Graphiti</h1>
-        <hr/>
+      <main className = "Grid-background">
+        <div className = "Graphiti-logo"/>
         <section class="u-textCenter">
           <p> Embrace your inner artsy, math nerd and make drawings with function graphs! Graphiti away!</p>
         </section>
+        
         <section class="u-textCenter">
           <h3>Start Creating!</h3>
         </section>
-        <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
+        {/* <NewFunctionInput defaultText="" addNewFunction={this.addNewFunction} /> 
         {functionsList}
-        <GraphingPanel functions = {this.state.functions}/> 
+        <GraphingPanel functions = {this.state.functions}/>  */}
+      </main>
       </>
     );
   }
