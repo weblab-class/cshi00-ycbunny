@@ -36,10 +36,10 @@ class SingleFunction extends Component {
 
 
   render() {
-    let tex = math.parse(this.props.exp).toTex();
-    return (
-      <div >
-        <span>y = </span>
+    if (this.props.mode === "cartesian"){
+      let tex = math.parse("y = "+this.props.exp).toTex()
+      return(
+        <div >
         <MathJax math={"$"+ tex + "$"} />
         <span>x from {this.props.leftRange} to {this.props.rightRange}</span>
         <button
@@ -51,7 +51,26 @@ class SingleFunction extends Component {
         Delete
         </button>
       </div>
-    );
+      )
+    };
+    if (this.props.mode === "polar"){
+      let tex = math.parse("r = "+ this.props.exp).toTex()
+      return(
+        <div >
+        <MathJax math={"$"+ tex + "$"} />
+        <span>origin ({this.props.origin[1]}, {this.props.origin[4]})</span>
+        <span>theta from {this.props.leftRange} to {this.props.rightRange}</span>
+        <button
+          type="submit"
+          className="NewPostInput-button u-pointer"
+          value="Submit"
+          onClick={this.handleDelete}
+        >
+        Delete
+        </button>
+      </div>
+      )
+    };
   }
 }
 

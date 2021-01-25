@@ -20,7 +20,8 @@ class Create extends Component {
     }
     this.state = {
       workId: workId,
-      functions: []
+      functions: [],
+      mode: "cartesian"
     };
   }
 
@@ -57,6 +58,8 @@ class Create extends Component {
           leftRange={functionObj.leftRange}
           rightRange={functionObj.rightRange}
           deleteOldFunction={this.deleteOldFunction}
+          mode={functionObj.mode}
+          origin={functionObj.origin}
         />
       ));
     } else {
@@ -68,9 +71,17 @@ class Create extends Component {
           <h1>Let's start creating!</h1>
           <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito):D.</p>
        </div>
-        <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} /> 
+        <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode} /> 
         {functionsList}
-        <GraphingPanel functions = {this.state.functions} workId ={this.state.workId}/> 
+        <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode}/> 
+        <button
+          type="submit"
+          className="NewPostInput-button u-pointer"
+          value="Submit"
+          onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+        >
+        change
+        </button>
       </>
     );
   }

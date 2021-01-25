@@ -73,7 +73,9 @@ router.post("/function", auth.ensureLoggedIn, (req, res) => {
   exp: req.body.exp,
   leftRange: req.body.leftRange,
   rightRange: req.body.rightRange,
-  workId: req.body.workId
+  workId: req.body.workId,
+  origin:req.body.origin,
+  mode: req.body.mode
   });
   newFunction.save().then((functioninput) => res.send(functioninput));
 

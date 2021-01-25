@@ -41,6 +41,18 @@ const math = create(all)
       this.setState({redirect: true});
     };
 
+    create = (func) => {
+      if (func.mode === "cartesian"){
+        this.state.board.create('curve', [function(t){return t;},
+          function(t){return math.evaluate(func.exp,{x:t});}, Number(func.leftRange), 
+            Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
+      }
+      if (func.mode === "polar"){
+        this.state.board.create('curve', [function(t){return math.evaluate(func.exp,{theta:t});},
+          [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
+      }
+    }
+
     render () {
       if (this.state.redirect){
         return <Redirect push to="/draw"/>;
@@ -49,9 +61,7 @@ const math = create(all)
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
         this.state.board.suspendUpdate();
         this.props.functions.map((functionObj) => (
-        this.curveDic[functionObj._id] = this.state.board.create('curve', [function(t){return t;},
-          function(t){return math.evaluate(functionObj.exp,{x:t});}, Number(functionObj.leftRange), Number(functionObj.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
-        ));
+        this.curveDic[functionObj._id] = this.create(functionObj)));
         this.state.board.unsuspendUpdate()
         this.setState({
           initialGraphingFinished:true
@@ -66,8 +76,7 @@ const math = create(all)
         let newCurve = this.props.functions.filter((functionObj) => (this.curveDic[functionObj._id]==null));
         let remove = currentCurves.filter(f => !newCurves.includes(f))
         if (newCurve !== null && newCurve.length !== 0){
-          this.curveDic[newCurve[0]._id] = this.state.board.create('curve', [function(t){return t;},
-          function(t){return math.evaluate(newCurve[0].exp,{x:t});}, Number(newCurve[0].leftRange), Number(newCurve[0].rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 });
+          this.curveDic[newCurve[0]._id] = this.create(newCurve[0]);
         }
         else if (remove !== null && remove.length !== 0) {
           this.state.board.removeObject(this.curveDic[remove[0]]);

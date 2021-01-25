@@ -17,12 +17,13 @@ class NewFunctionInput extends Component {
     this.state = {
       exp: "",
       leftRange: "",
-      rightRange:""
+      rightRange:"",
+      origin:"",
     };
   }
 
-  addFunction = (a, b, c, d) => {
-    const body = {exp: a, leftRange: b, rightRange: c, workId: d};
+  addFunction = (a, b, c, d, e, f) => {
+    const body = {exp: a, leftRange: b, rightRange: c, workId: d, mode: f, origin: e};
     post("/api/function", body).then((func) => {
       // display this story on the screen
       this.props.addNewFunction(func);
@@ -48,21 +49,69 @@ class NewFunctionInput extends Component {
     });
   };
 
+  originChange = (event) => {
+    this.setState({
+      origin: event.target.value,
+    });
+  };
+
   // called when the user hits "Submit" for a new post
   handleSubmit = (event) => {
     event.preventDefault();
-    this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange, this.props.workId);
+    console.log(this.props.mode);
+    this.addFunction(this.state.exp, this.state.leftRange, this.state.rightRange, this.props.workId, this.state.origin, this.props.mode);
     this.setState({
         exp: "",
         leftRange: "",
-        rightRange:""
+        rightRange:"",
+        mode:"",
+        origin:""
     });
   };
 
   render() {
+    if (this.props.mode === "cartesian"){
+      return (
+        <div className="u-flex">
+          <span>y = </span>
+          <input
+            type="text"
+            placeholder={this.props.defaultText}
+            value={this.state.exp}
+            onChange={this.expChange}
+            className="NewPostInput-input"
+          />
+          <span> x from </span>
+          <input
+            type="text"
+            placeholder={this.props.defaultText}
+            value={this.state.leftRange}
+            onChange={this.leftRangeChange}
+            className="NewPostInput-input"
+          />
+          <span> to </span>
+          <input
+            type="text"
+            placeholder={this.props.defaultText}
+            value={this.state.rightRange}
+            onChange={this.rightRangeChange}
+            className="NewPostInput-input"
+          />
+          <button
+            type="submit"
+            className="NewPostInput-button u-pointer"
+            value="Submit"
+            onClick={this.handleSubmit}
+          >
+            Enter
+          </button>
+        </div>
+      );
+    }
+  if (this.props.mode === "polar"){
     return (
       <div className="u-flex">
-        <span>y = </span>
+        <span>r = </span>
         <input
           type="text"
           placeholder={this.props.defaultText}
@@ -70,7 +119,15 @@ class NewFunctionInput extends Component {
           onChange={this.expChange}
           className="NewPostInput-input"
         />
-        <span> x from </span>
+        <span> origin </span>
+        <input
+          type="text"
+          placeholder="(x, y)"
+          value={this.state.origin}
+          onChange={this.originChange}
+          className="NewPostInput-input"
+        />
+        <span> theta from </span>
         <input
           type="text"
           placeholder={this.props.defaultText}
@@ -96,6 +153,7 @@ class NewFunctionInput extends Component {
         </button>
       </div>
     );
+  }
   }
 }
 

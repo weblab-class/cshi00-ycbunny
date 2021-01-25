@@ -8,6 +8,8 @@ const FunctionInputSchema = new mongoose.Schema({
     leftRange: String,
     rightRange: String,
     workId: String,
+    origin: String,
+    mode: String,
 });
 
 // compile model from schema
