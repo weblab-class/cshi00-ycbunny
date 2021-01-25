@@ -3,6 +3,7 @@ import "../../utilities.css";
 import { render } from "react-dom";
 import CanvasDraw from "react-canvas-draw";
 import classNames from "./Draw.css";
+import { CirclePicker } from 'react-color';
 
 
 class Draw extends Component {
@@ -11,22 +12,22 @@ class Draw extends Component {
     width: 400,
     height: 400,
     brushRadius: 10,
-    lazyRadius: 12
+    lazyRadius: 0
   };
   componentDidMount() {
     // let's change the color randomly every 2 seconds. fun!
-    window.setInterval(() => {
-      this.setState({
-        color: "#" + Math.floor(Math.random() * 16777215).toString(16)
-      });
-    }, 2000);
   }
+
+  handleChangeComplete = (color, event) => {
+    this.setState({ color: color.hex });
+  };
 
   render() {
     return (
       <div>
         <h1>React Canvas Draw</h1>
         <p>Try it out! Draw something, hit "Save" and then "Load".</p>
+        <CirclePicker onChangeComplete={ this.handleChangeComplete } />
         <div className={classNames.tools}>
           <button
             onClick={() => {
@@ -79,16 +80,6 @@ class Draw extends Component {
               value={this.state.brushRadius}
               onChange={e =>
                 this.setState({ brushRadius: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <div>
-            <label>Lazy-Radius:</label>
-            <input
-              type="number"
-              value={this.state.lazyRadius}
-              onChange={e =>
-                this.setState({ lazyRadius: parseInt(e.target.value, 10) })
               }
             />
           </div>
