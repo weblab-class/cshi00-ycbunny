@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { create, all } from 'mathjs';
 
 import "./SingleFunction.css";
 import { post } from "../../utilities";
+const math = create(all);
+import MathJax from 'react-mathjax-preview'
 /**
  * Card is a component for displaying content like stories
  *
@@ -31,10 +34,13 @@ class SingleFunction extends Component {
     this.deleteFunction(this.props._id);
   };
 
+
   render() {
+    let tex = math.parse(this.props.exp).toTex();
     return (
       <div >
-        <span>y = {this.props.exp},  </span>
+        <span>y = </span>
+        <MathJax math={"$"+ tex + "$"} />
         <span>x from {this.props.leftRange} to {this.props.rightRange}</span>
         <button
           type="submit"
