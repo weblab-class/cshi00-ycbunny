@@ -5,10 +5,33 @@
   padding: var(--s) var(--m);
 }
 
-.NewPostInput-input {
-  flex-shrink:2;
+/* .NewPostInput-input {
   border: var(--darkgrey) 1px solid;
-  border-radius: var(--xs) 0 0 var(--xs);
+  border-radius: var(--xs);
+  transition: box-shadow 0.1s;
+} */
+
+.Function-input-box{
+  width:270px;
+  height:40px;
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs);
+  transition: box-shadow 0.1s;
+}
+
+.Origin-input-box{
+  width:45px;
+  height:40px;
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs);
+  transition: box-shadow 0.1s;
+}
+
+.Bound-input-box{
+  width:30px;
+  height:40px;
+  border: var(--darkgrey) 1px solid;
+  border-radius: var(--xs);
   transition: box-shadow 0.1s;
 }
 
@@ -20,12 +43,31 @@
 .NewPostInput-button {
   color: var(--primary);
   border: var(--primary) 1px solid;
-  border-radius: 0 var(--xs) var(--xs) 0;
+  border-radius: var(--xs);
   background: none;
   transition: color 0.1s, background 0.1s;
+  margin: 5px;
+}
+
+.NewPostInput-button-extra {
+  color: var(--primary);
+  border: var(--primary) 1px solid;
+  border-radius: var(--xs);
+  background: none;
+  transition: color 0.1s, background 0.1s;
+  margin: 5px
 }
 
 .NewPostInput-button:hover {
   color: var(--white);
   background-color: var(--primary);
+}
+
+.NewPostInput-container{
+  border: var(--lightgrey) 5px solid;
+  border-radius: 10px;
+  padding: 5px;
+  width: 800px;
+  height: 50px;
+
 }

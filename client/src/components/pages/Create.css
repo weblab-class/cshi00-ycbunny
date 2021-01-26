@@ -4,10 +4,11 @@
 .page-layout{
     display: flex;
     overflow-x: scroll;
+    justify-content: space-evenly;
 }
 .graph-panel{
-    border: var(--lightgrey) 2px solid;
-    border-radius: var(--s);;
+    border: var(--lightgrey) 5px solid;
+    border-radius: 10px;;
 }
 .function-input{
     display:flex;

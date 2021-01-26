@@ -9,6 +9,7 @@ import { post } from "../../utilities";
  * Proptypes
  * @param {string} defaultText is the placeholder text
  * @param {({functionId, value}) => void} addNewFunction: (function) triggered when this post is submitted, takes {storyId, value} as parameters
+ * @param changeBetweenCartPolar 
  */
 class NewFunctionInput extends Component {
   constructor(props) {
@@ -21,6 +22,10 @@ class NewFunctionInput extends Component {
       origin:"",
     };
   }
+  changeMode = () => {
+    console.log(1);
+    this.props.changeBetweenCartPolar();
+  };
 
   addFunction = (a, b, c, d, e, f) => {
     const body = {exp: a, leftRange: b, rightRange: c, workId: d, mode: f, origin: e};
@@ -72,14 +77,14 @@ class NewFunctionInput extends Component {
   render() {
     if (this.props.mode === "cartesian"){
       return (
-        <div className="u-flex">
+        <div className=" NewPostInput-container">
           <button
                 type="submit"
                 className="NewPostInput-button u-pointer"
                 value="Submit"
-                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+                onClick={this.changeMode}
               >
-              change
+              ➡ Polar
           </button>
           <span>y = </span>
           <input
@@ -87,7 +92,7 @@ class NewFunctionInput extends Component {
             placeholder={this.props.defaultText}
             value={this.state.exp}
             onChange={this.expChange}
-            className="NewPostInput-input"
+            className="Function-input-box"
           />
           <span> x from </span>
           <input
@@ -95,7 +100,7 @@ class NewFunctionInput extends Component {
             placeholder={this.props.defaultText}
             value={this.state.leftRange}
             onChange={this.leftRangeChange}
-            className="NewPostInput-input"
+            className="Bound-input-box"
           />
           <span> to </span>
           <input
@@ -103,8 +108,9 @@ class NewFunctionInput extends Component {
             placeholder={this.props.defaultText}
             value={this.state.rightRange}
             onChange={this.rightRangeChange}
-            className="NewPostInput-input"
+            className="Bound-input-box"
           />
+        
           <button
             type="submit"
             className="NewPostInput-button u-pointer"
@@ -118,14 +124,14 @@ class NewFunctionInput extends Component {
     }
   if (this.props.mode === "polar"){
     return (
-      <div className="u-flex">
+      <div className="NewPostInput-container">
         <button
                 type="submit"
                 className="NewPostInput-button u-pointer"
                 value="Submit"
-                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+                onClick={this.changeMode}
               >
-              change
+              ➡ Cartesian
         </button>
         <span>r = </span>
         <input
@@ -133,15 +139,7 @@ class NewFunctionInput extends Component {
           placeholder={this.props.defaultText}
           value={this.state.exp}
           onChange={this.expChange}
-          className="NewPostInput-input"
-        />
-        <span> origin </span>
-        <input
-          type="text"
-          placeholder="(x, y)"
-          value={this.state.origin}
-          onChange={this.originChange}
-          className="NewPostInput-input"
+          className="Function-input-box"
         />
         <span> theta from </span>
         <input
@@ -149,7 +147,7 @@ class NewFunctionInput extends Component {
           placeholder={this.props.defaultText}
           value={this.state.leftRange}
           onChange={this.leftRangeChange}
-          className="NewPostInput-input"
+          className="Bound-input-box"
         />
         <span> to </span>
         <input
@@ -157,7 +155,15 @@ class NewFunctionInput extends Component {
           placeholder={this.props.defaultText}
           value={this.state.rightRange}
           onChange={this.rightRangeChange}
-          className="NewPostInput-input"
+          className="Bound-input-box"
+        />
+        <span> origin </span>
+        <input
+          type="text"
+          placeholder="(x, y)"
+          value={this.state.origin}
+          onChange={this.originChange}
+          className="Origin-input-box"
         />
         <button
           type="submit"
