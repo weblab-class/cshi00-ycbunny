@@ -11,8 +11,8 @@ import { get } from "../../utilities";
 class Draw extends Component {
   state = {
     color: "#ffc600",
-    width: 400,
-    height: 400,
+    width: 500,
+    height: 500,
     brushRadius: 10,
     lazyRadius: 0,
     background: null,
@@ -78,72 +78,11 @@ class Draw extends Component {
   render() {
     return (
       <div>
-        <h1>React Canvas Draw</h1>
-        <p>Try it out! Draw something, hit "Save" and then "Load".</p>
-        <CirclePicker onChangeComplete={ this.handleChangeComplete } />
-        <div className={classNames.tools}>
-          <button
-            onClick={() => {
-              localStorage.setItem(
-                "savedDrawing",
-                this.saveableCanvas.getSaveData()
-              );
-            }}
-          >
-            Save
-          </button>
-          <button
-            onClick={() => {
-              this.saveableCanvas.clear();
-            }}
-          >
-            Clear
-          </button>
-          <button
-            onClick={() => {
-              this.saveableCanvas.undo();
-            }}
-          >
-            Undo
-          </button>
-          <div>
-            <label>Width:</label>
-            <input
-              type="number"
-              value={this.state.width}
-              onChange={e =>
-                this.setState({ width: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <div>
-            <label>Height:</label>
-            <input
-              type="number"
-              value={this.state.height}
-              onChange={e =>
-                this.setState({ height: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <div>
-            <label>Brush-Radius:</label>
-            <input
-              type="number"
-              value={this.state.brushRadius}
-              onChange={e =>
-                this.setState({ brushRadius: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <button
-          onClick={() => {
-            this.setState({ color: "#FFFFFF"}
-            );
-          }}
-        > Eraser
-        </button>  
+        <div className="Draw-title">
+          <h1>React Canvas Draw</h1>
+          <p>Try it out! Draw something, hit "Save" and then "Load".</p>
         </div>
+      <div className="page-layout">
         <CanvasDraw
           hideGrid
           ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
@@ -155,8 +94,63 @@ class Draw extends Component {
           erase={this.state.erase}
           imgSrc = {this.state.background}
           saveData = {localStorage.getItem("savedDrawing")}
+          className="drawing-panel"
         />
+    <div className="rightside">
+      <div className="colorSelectBox">
+        <div className="colordots">
+        <CirclePicker onChangeComplete={ this.handleChangeComplete } 
+        />
+        </div>
         <button
+          className = "Draw-button eraser-container"
+          onClick={() => {
+            this.setState({ color: "#FFFFFF"}
+            );
+          }}
+        > Eraser
+        </button> 
+            <label>Brush-Radius: </label>
+            <input
+              className="brush-radius"
+              type="number"
+              value={this.state.brushRadius}
+              onChange={e =>
+                this.setState({ brushRadius: parseInt(e.target.value, 10) })
+              }
+            />
+        <div className={classNames.tools}>
+          <button
+            className = "Draw-button"
+            onClick={() => {
+              localStorage.setItem(
+                "savedDrawing",
+                this.saveableCanvas.getSaveData()
+              );
+            }}
+          >
+            Save
+          </button>
+          <button
+            className = "Draw-button"
+            onClick={() => {
+              this.saveableCanvas.clear();
+            }}
+          >
+            Clear
+          </button>
+          <button
+            className = "Draw-button"
+            onClick={() => {
+              this.saveableCanvas.undo();
+            }}
+          >
+            Undo
+          </button>
+        </div>
+      </div>
+        <button
+          className = "Draw-button finish-container"
           onClick={() => {
             // let baseCanvas = this.saveableCanvas.canvasContainer.children[3]; // canvas with background image
             // let baseCanvasContex = this.saveableCanvas.getContext('2d');
@@ -166,6 +160,8 @@ class Draw extends Component {
             this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}
         > Finished
         </button> 
+        </div>
+        </div>
       </div>
     );
   }
