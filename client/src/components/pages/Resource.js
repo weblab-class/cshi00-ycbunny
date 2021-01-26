@@ -7,8 +7,8 @@ import "./Resource.css";
 let Linear = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});;
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});;
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
   var d = brd.create('curve', [
@@ -21,9 +21,9 @@ let Linear = (brd) => {
 let Quadratic = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
   var d = brd.create('curve', [
@@ -36,10 +36,10 @@ let Quadratic = (brd) => {
 let Cubic = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
-  var D = brd.create('slider', [[2, 4], [6, 4], [-6, 3, 6]], { name: 'D' });
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
+  var D = brd.create('slider', [[2, 4], [6, 4], [-6, 0, 6]], { name: 'D' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
   var d = brd.create('curve', [
@@ -52,9 +52,9 @@ let Cubic = (brd) => {
 let Squareroot = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
   //var D = brd.create('slider', [[2, 4], [6, 4], [-6, 3, 6]], { name: 'D' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
@@ -67,9 +67,9 @@ let Squareroot = (brd) => {
 let Cuberoot = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
   //var D = brd.create('slider', [[2, 4], [6, 4], [-6, 3, 6]], { name: 'D' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
@@ -84,8 +84,8 @@ let Exponential = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
   var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
   //var D = brd.create('slider', [[2, 4], [6, 4], [-6, 3, 6]], { name: 'D' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
@@ -99,9 +99,9 @@ let Exponential = (brd) => {
 let Naturallog = (brd) => {
   brd.suspendUpdate();
   //var a = brd.create('slider', [[2, 8], [6, 8], [0, 3, 6]], { name: 'a' });
-  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 2, 6]], { name: 'A' });
-  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 3, 6]], { name: 'B'});
-  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 3, 6]], { name: 'C' });
+  var A = brd.create('slider', [[2, 7], [6, 7], [-6, 1, 6]], { name: 'A' });
+  var B = brd.create('slider', [[2, 6], [6, 6], [-6, 0, 6]], { name: 'B'});
+  var C = brd.create('slider', [[2, 5], [6, 5], [-6, 0, 6]], { name: 'C' });
   //var D = brd.create('slider', [[2, 4], [6, 4], [-6, 3, 6]], { name: 'D' });
   //var delta = brd.create('slider', [[2, 4], [6, 4], [0, 0, Math.PI]], { name: '&delta;' });
  
@@ -144,7 +144,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Linear}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px solid light grey"
           }}
@@ -156,7 +156,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Quadratic}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }}
@@ -168,7 +168,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Cubic}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }}
@@ -180,7 +180,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Squareroot}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }}
@@ -192,7 +192,7 @@ class Resource extends Component {
           </section>
         <JXGBoard
           logic={Cuberoot}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }}
@@ -204,7 +204,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Exponential}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }} 
@@ -216,7 +216,7 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Naturallog}
-          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10] }}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
           }} 

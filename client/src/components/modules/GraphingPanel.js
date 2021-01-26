@@ -4,6 +4,8 @@ import { create, all } from 'mathjs';
 import JXG from 'jsxgraph';
 import assign from 'lodash/assign';
 import { post } from "../../utilities";
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 const math = create(all)
   class GraphingPanel extends Component {
@@ -12,11 +14,38 @@ const math = create(all)
       this.id = 'board_' + Math.random().toString(36).substr(2, 9)
       this.state = { board: null,  initialGraphingFinished: false}
       this.defaultStyle = { width: 500, height: 500 }
-      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10], showScreenshot: true,  renderer: 'canvas' }
+      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10], 
+        showScreenshot: true,  renderer: 'canvas',
+        showCopyright: false }
       this.curveDic = {}
       this.redirect = false
     };
+
+    scrollToWithContainer(func) {
   
+      let goToContainer = new Promise((resolve, reject) => {
+  
+        Events.scrollEvent.register('end', () => {
+          resolve();
+          Events.scrollEvent.remove('end');
+        });
+  
+        scroller.scrollTo('scroll-container', {
+          duration: 80,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+  
+      });
+  
+      goToContainer.then(() =>
+        scroller.scrollTo(func, {
+          duration: 800,
+          delay: 0,
+          smooth: 'easeInOutQuart',
+          containerId: 'scroll-container'
+        }));
+    }
     componentDidMount() {
       // now that div exists, create new JSXGraph board with it
       let attributes = {}
@@ -27,6 +56,8 @@ const math = create(all)
       this.setState({
         board: board
       })
+      var urlImg = "http://jsxgraph.uni-bayreuth.de/distrib/images/uccellino.jpg";
+      var im = board.create('image',[urlImg, [-1,-1], [3,3] ]);
     }
 
     saveImage = (board) => {
@@ -43,16 +74,16 @@ const math = create(all)
 
     create = (func) => {
       if (func.mode === "cartesian"){
-        this.state.board.create('curve', [function(t){return t;},
+        return (this.state.board.create('curve', [function(t){return t;},
           function(t){return math.evaluate(func.exp,{x:t});}, Number(func.leftRange), 
-            Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
+            Number(func.rightRange)], { strokeColor: '#000000', strokeWidth: 3 }))
       }
       if (func.mode === "polar"){
-        this.state.board.create('curve', [function(t){return math.evaluate(func.exp,{theta:t});},
-          [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 })
+        return(this.state.board.create('curve', [function(t){return math.evaluate(func.exp,{theta:t});},
+          [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#000000', strokeWidth: 3 }))
       }
     }
-
+    
     render () {
       if (this.state.redirect){
         return <Redirect push to="/draw"/>;
@@ -61,12 +92,22 @@ const math = create(all)
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
         this.state.board.suspendUpdate();
         this.props.functions.map((functionObj) => (
-        this.curveDic[functionObj._id] = this.create(functionObj)));
+          this.curveDic[functionObj._id] = this.create(functionObj)));
+        var keys = Object.keys(this.curveDic);
+        let changePosition = this.props.changePosition;
+        let dic = this.curveDic;
+        let scrollToWithContainer = this.scrollToWithContainer
+        keys.forEach(function(key){
+          dic[key].on('mousedown', function () {
+            // changePosition(key);
+            console.log("s"+key+"k")
+            scrollToWithContainer("s"+key+"k")
+          })
+        });
         this.state.board.unsuspendUpdate()
         this.setState({
           initialGraphingFinished:true
         })
-        let pic = this.state.board.renderer.canvasRoot.toDataURL();
       }
       if (this.state.initialGraphingFinished ===true){
         let currentCurves = Object.keys(this.curveDic);
@@ -76,9 +117,15 @@ const math = create(all)
         let newCurve = this.props.functions.filter((functionObj) => (this.curveDic[functionObj._id]==null));
         let remove = currentCurves.filter(f => !newCurves.includes(f))
         if (newCurve !== null && newCurve.length !== 0){
-          this.curveDic[newCurve[0]._id] = this.create(newCurve[0]);
+          let c = this.create(newCurve[0]);
+          let changePosition = this.props.changePosition
+          c.on('mousedown', function () {
+            changePosition(newCurve[0]._id)
+          });
+          this.curveDic[newCurve[0]._id] = c;
         }
         else if (remove !== null && remove.length !== 0) {
+          console.log(remove[0]);
           this.state.board.removeObject(this.curveDic[remove[0]]);
           delete this.curveDic[remove[0]];
         }

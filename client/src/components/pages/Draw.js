@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "@reach/router";
 import "../../utilities.css";
 import { render } from "react-dom";
-import CanvasDraw from "react-canvas-draw";
+import CanvasDraw from '../modules/index';
 import classNames from "./Draw.css";
 import { CirclePicker } from 'react-color';
 import { get } from "../../utilities";
@@ -16,6 +16,7 @@ class Draw extends Component {
     brushRadius: 10,
     lazyRadius: 0,
     background: null,
+    erase: false,
   };
   componentDidMount() {
     let background = sessionStorage.getItem("image");
@@ -152,11 +153,6 @@ class Draw extends Component {
         <button
           className = "Draw-button finish-container"
           onClick={() => {
-            // let baseCanvas = this.saveableCanvas.canvasContainer.children[3]; // canvas with background image
-            // let baseCanvasContex = this.saveableCanvas.getContext('2d');
-            // baseCanvasContex.drawImage(canvasRef.current.canvasContainer.children[1], 0, 0); // add drawing
-            // console.log(baseCanvas.toDataURL());
-            // return baseCanvas.toDataURL(); // or whatever
             this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}
         > Finished
         </button> 

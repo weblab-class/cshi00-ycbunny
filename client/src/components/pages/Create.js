@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
 import SingleFunction from "../modules/SingleFunction.js";
-
+import ScrollBar from "../modules/ScrollBar.js";
 
 import { get } from "../../utilities";
 import "../../utilities.css";
@@ -21,7 +21,8 @@ class Create extends Component {
     this.state = {
       workId: workId,
       functions: [],
-      mode: "cartesian"
+      mode: "cartesian",
+      position: ""
     };
   }
 
@@ -51,29 +52,13 @@ class Create extends Component {
     });
   };
 
+  changePosition = (func) => {
+    this.setState({
+      position: func
+    });
+  };
 
   render() {
-    let functionsList = null;
-    const hasFunctions = this.state.functions.length !== 0;
-    if (hasFunctions) {
-      functionsList = this.state.functions.map((functionObj) => (
-        <div>
-          <SingleFunction
-            _id={functionObj._id}
-            creator_name={functionObj.creator_name}
-            workId = {functionObj.workId}
-            exp={functionObj.exp}
-            leftRange={functionObj.leftRange}
-            rightRange={functionObj.rightRange}
-            deleteOldFunction={this.deleteOldFunction}
-            mode={functionObj.mode}
-            origin={functionObj.origin}
-          />
-        </div>
-      ));
-    } else {
-      functionsList = <div></div>;
-    }
     return (
       <>
        <div className="Create-title">
@@ -82,22 +67,14 @@ class Create extends Component {
        </div>
         <div className="page-layout">
           <div className="graph-panel">
-            <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode}/> 
+            <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode} changePosition = {this.changePosition}/> 
           </div>
           <div className="function-input">
             <div className="function-and-button">
-              {/* <button
-                type="submit"
-                className="NewPostInput-button u-pointer"
-                value="Submit"
-                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
-              >
-              change
-              </button> */}
               <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} changeBetweenCartPolar = {this.changeBetweenCartPolar} workId = {this.state.workId} mode = {this.state.mode}/> 
             </div>
-            <div className="functionBox">
-              {functionsList}
+            <div className="functionBox" id="scroll-container"> 
+              <ScrollBar functions={this.state.functions} position = {this.state.position} deleteOldFunction = {this.deleteOldFunction}/>
             </div>
           </div>
         </div>
