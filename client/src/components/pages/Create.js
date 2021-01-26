@@ -45,22 +45,25 @@ class Create extends Component {
     });
   };
 
+
   render() {
     let functionsList = null;
     const hasFunctions = this.state.functions.length !== 0;
     if (hasFunctions) {
       functionsList = this.state.functions.map((functionObj) => (
-        <SingleFunction
-          _id={functionObj._id}
-          creator_name={functionObj.creator_name}
-          workId = {functionObj.workId}
-          exp={functionObj.exp}
-          leftRange={functionObj.leftRange}
-          rightRange={functionObj.rightRange}
-          deleteOldFunction={this.deleteOldFunction}
-          mode={functionObj.mode}
-          origin={functionObj.origin}
-        />
+        <div>
+          <SingleFunction
+            _id={functionObj._id}
+            creator_name={functionObj.creator_name}
+            workId = {functionObj.workId}
+            exp={functionObj.exp}
+            leftRange={functionObj.leftRange}
+            rightRange={functionObj.rightRange}
+            deleteOldFunction={this.deleteOldFunction}
+            mode={functionObj.mode}
+            origin={functionObj.origin}
+          />
+        </div>
       ));
     } else {
       functionsList = <div></div>;
@@ -76,18 +79,22 @@ class Create extends Component {
             <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode}/> 
           </div>
           <div className="function-input">
-            <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode}/> 
-            {functionsList}
+            <div className="function-and-button">
+              {/* <button
+                type="submit"
+                className="NewPostInput-button u-pointer"
+                value="Submit"
+                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+              >
+              change
+              </button> */}
+              <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode}/> 
+            </div>
+            <div className="functionBox">
+              {functionsList}
+            </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="NewPostInput-button u-pointer"
-          value="Submit"
-          onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
-        >
-        change
-        </button>
       </>
     );
   }

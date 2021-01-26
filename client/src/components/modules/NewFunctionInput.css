@@ -1,12 +1,12 @@
 .NewPostInput-input,
 .NewPostInput-button {
-  font-family: "Open Sans";
+  font-family: "Comfortaa";
   font-size: 14px;
   padding: var(--s) var(--m);
 }
 
 .NewPostInput-input {
-  flex-grow: 1;
+  flex-shrink:2;
   border: var(--darkgrey) 1px solid;
   border-radius: var(--xs) 0 0 var(--xs);
   transition: box-shadow 0.1s;

@@ -39,16 +39,16 @@ class SingleFunction extends Component {
     if (this.props.mode === "cartesian"){
       let tex = math.parse("y = "+this.props.exp).toTex()
       return(
-        <div >
+        <div className="Each-function" >
         <MathJax math={"$"+ tex + "$"} />
-        <span>x from {this.props.leftRange} to {this.props.rightRange}</span>
+        {/* <span>x from {this.props.leftRange} to {this.props.rightRange}</span> */}
         <button
           type="submit"
-          className="NewPostInput-button u-pointer"
+          className="SingleFunction-button u-pointer"
           value="Submit"
           onClick={this.handleDelete}
         >
-        Delete
+        ❌
         </button>
       </div>
       )
@@ -56,17 +56,17 @@ class SingleFunction extends Component {
     if (this.props.mode === "polar"){
       let tex = math.parse("r = "+ this.props.exp).toTex()
       return(
-        <div >
+        <div className="Each-function">
         <MathJax math={"$"+ tex + "$"} />
-        <span>origin ({this.props.origin[1]}, {this.props.origin[4]})</span>
-        <span>theta from {this.props.leftRange} to {this.props.rightRange}</span>
+        {/* <span>origin ({this.props.origin[1]}, {this.props.origin[4]})</span>
+        <span>theta from {this.props.leftRange} to {this.props.rightRange}</span> */}
         <button
           type="submit"
-          className="NewPostInput-button u-pointer"
+          className="SingleFunction-button u-pointer"
           value="Submit"
           onClick={this.handleDelete}
         >
-        Delete
+        ❌
         </button>
       </div>
       )

@@ -1,0 +1,12 @@
+.SingleFunction-button{
+    border: var(--lightgrey) 2px solid;
+    border-radius: 5px;
+}
+
+.Each-function{
+    flex-grow:1;
+    padding: 5px;
+    display:inline-block;
+    border: var(--lightgrey) 2px solid;
+    border-radius: 5px;
+}
