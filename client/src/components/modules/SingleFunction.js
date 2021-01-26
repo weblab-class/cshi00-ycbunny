@@ -40,8 +40,7 @@ class SingleFunction extends Component {
       let tex = math.parse("y = "+this.props.exp).toTex()
       return(
         <div >
-        <MathJax math={"$"+ tex + "$"} />
-        <span>x from {this.props.leftRange} to {this.props.rightRange}</span>
+        <MathJax config= {{display: "inline"}} math={"$"+ tex + "$" + "   x from " + this.props.leftRange +" to "+ this.props.rightRange} />
         <button
           type="submit"
           className="NewPostInput-button u-pointer"
@@ -57,7 +56,7 @@ class SingleFunction extends Component {
       let tex = math.parse("r = "+ this.props.exp).toTex()
       return(
         <div >
-        <MathJax math={"$"+ tex + "$"} />
+        <MathJax config= {{display: "inline"}} math={"$"+ tex + "$"} />
         <span>origin ({this.props.origin[1]}, {this.props.origin[4]})</span>
         <span>theta from {this.props.leftRange} to {this.props.rightRange}</span>
         <button

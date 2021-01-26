@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "@reach/router";
 import "../../utilities.css";
 import { render } from "react-dom";
-import CanvasDraw from "react-canvas-draw";
+import CanvasDraw from '../modules/index';
 import classNames from "./Draw.css";
 import { CirclePicker } from 'react-color';
 import { get } from "../../utilities";
@@ -11,11 +11,12 @@ import { get } from "../../utilities";
 class Draw extends Component {
   state = {
     color: "#ffc600",
-    width: 400,
-    height: 400,
+    width: 800,
+    height: 800,
     brushRadius: 10,
     lazyRadius: 0,
     background: null,
+    erase: false,
   };
   componentDidMount() {
     let background = sessionStorage.getItem("image");
@@ -107,26 +108,6 @@ class Draw extends Component {
             Undo
           </button>
           <div>
-            <label>Width:</label>
-            <input
-              type="number"
-              value={this.state.width}
-              onChange={e =>
-                this.setState({ width: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <div>
-            <label>Height:</label>
-            <input
-              type="number"
-              value={this.state.height}
-              onChange={e =>
-                this.setState({ height: parseInt(e.target.value, 10) })
-              }
-            />
-          </div>
-          <div>
             <label>Brush-Radius:</label>
             <input
               type="number"
@@ -138,7 +119,7 @@ class Draw extends Component {
           </div>
           <button
           onClick={() => {
-            this.setState({ color: "#FFFFFF"}
+            this.setState({ erase: (this.state.erase === true) ? false : true }
             );
           }}
         > Eraser
@@ -154,15 +135,11 @@ class Draw extends Component {
           canvasHeight={this.state.height}
           erase={this.state.erase}
           imgSrc = {this.state.background}
+          immediateLoading = {true}
           saveData = {localStorage.getItem("savedDrawing")}
         />
         <button
           onClick={() => {
-            // let baseCanvas = this.saveableCanvas.canvasContainer.children[3]; // canvas with background image
-            // let baseCanvasContex = this.saveableCanvas.getContext('2d');
-            // baseCanvasContex.drawImage(canvasRef.current.canvasContainer.children[1], 0, 0); // add drawing
-            // console.log(baseCanvas.toDataURL());
-            // return baseCanvas.toDataURL(); // or whatever
             this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}
         > Finished
         </button> 
