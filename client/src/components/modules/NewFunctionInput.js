@@ -73,6 +73,14 @@ class NewFunctionInput extends Component {
     if (this.props.mode === "cartesian"){
       return (
         <div className="u-flex">
+          <button
+                type="submit"
+                className="NewPostInput-button u-pointer"
+                value="Submit"
+                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+              >
+              change
+          </button>
           <span>y = </span>
           <input
             type="text"
@@ -103,7 +111,7 @@ class NewFunctionInput extends Component {
             value="Submit"
             onClick={this.handleSubmit}
           >
-            Enter
+            ✅
           </button>
         </div>
       );
@@ -111,6 +119,14 @@ class NewFunctionInput extends Component {
   if (this.props.mode === "polar"){
     return (
       <div className="u-flex">
+        <button
+                type="submit"
+                className="NewPostInput-button u-pointer"
+                value="Submit"
+                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
+              >
+              change
+        </button>
         <span>r = </span>
         <input
           type="text"
@@ -149,7 +165,7 @@ class NewFunctionInput extends Component {
           value="Submit"
           onClick={this.handleSubmit}
         >
-          Enter
+          ✅
         </button>
       </div>
     );

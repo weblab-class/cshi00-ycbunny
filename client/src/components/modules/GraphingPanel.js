@@ -4,6 +4,8 @@ import { create, all } from 'mathjs';
 import JXG from 'jsxgraph';
 import assign from 'lodash/assign';
 import { post } from "../../utilities";
+import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+
 
 const math = create(all)
   class GraphingPanel extends Component {
@@ -18,7 +20,32 @@ const math = create(all)
       this.curveDic = {}
       this.redirect = false
     };
+
+    scrollToWithContainer(func) {
   
+      let goToContainer = new Promise((resolve, reject) => {
+  
+        Events.scrollEvent.register('end', () => {
+          resolve();
+          Events.scrollEvent.remove('end');
+        });
+  
+        scroller.scrollTo('scroll-container', {
+          duration: 80,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
+  
+      });
+  
+      goToContainer.then(() =>
+        scroller.scrollTo(func, {
+          duration: 800,
+          delay: 0,
+          smooth: 'easeInOutQuart',
+          containerId: 'scroll-container'
+        }));
+    }
     componentDidMount() {
       // now that div exists, create new JSXGraph board with it
       let attributes = {}
@@ -56,9 +83,8 @@ const math = create(all)
           [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 }))
       }
     }
-
+    
     render () {
-      console.log(this.curveDic)
       if (this.state.redirect){
         return <Redirect push to="/draw"/>;
       }
@@ -66,7 +92,18 @@ const math = create(all)
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
         this.state.board.suspendUpdate();
         this.props.functions.map((functionObj) => (
-        this.curveDic[functionObj._id] = this.create(functionObj)));
+          this.curveDic[functionObj._id] = this.create(functionObj)));
+        var keys = Object.keys(this.curveDic);
+        let changePosition = this.props.changePosition;
+        let dic = this.curveDic;
+        let scrollToWithContainer = this.scrollToWithContainer
+        keys.forEach(function(key){
+          dic[key].on('mousedown', function () {
+            // changePosition(key);
+            console.log("s"+key+"k")
+            scrollToWithContainer("s"+key+"k")
+          })
+        });
         this.state.board.unsuspendUpdate()
         this.setState({
           initialGraphingFinished:true
@@ -80,7 +117,12 @@ const math = create(all)
         let newCurve = this.props.functions.filter((functionObj) => (this.curveDic[functionObj._id]==null));
         let remove = currentCurves.filter(f => !newCurves.includes(f))
         if (newCurve !== null && newCurve.length !== 0){
-          this.curveDic[newCurve[0]._id] = this.create(newCurve[0]);
+          let c = this.create(newCurve[0]);
+          let changePosition = this.props.changePosition
+          c.on('mousedown', function () {
+            changePosition(newCurve[0]._id)
+          });
+          this.curveDic[newCurve[0]._id] = c;
         }
         else if (remove !== null && remove.length !== 0) {
           console.log(remove[0]);
