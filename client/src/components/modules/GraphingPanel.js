@@ -76,11 +76,11 @@ const math = create(all)
       if (func.mode === "cartesian"){
         return (this.state.board.create('curve', [function(t){return t;},
           function(t){return math.evaluate(func.exp,{x:t});}, Number(func.leftRange), 
-            Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 }))
+            Number(func.rightRange)], { strokeColor: '#000000', strokeWidth: 3 }))
       }
       if (func.mode === "polar"){
         return(this.state.board.create('curve', [function(t){return math.evaluate(func.exp,{theta:t});},
-          [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#aa2233', strokeWidth: 3 }))
+          [Number(func.origin[1]), Number(func.origin[4])],Number(func.leftRange),Number(func.rightRange)], { strokeColor: '#000000', strokeWidth: 3 }))
       }
     }
     
