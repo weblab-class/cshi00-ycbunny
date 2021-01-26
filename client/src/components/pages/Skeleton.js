@@ -3,6 +3,7 @@ import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
 import SingleFunction from "../modules/SingleFunction.js";
 import NavBar from "../modules/NavBar.js";
+import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 
 import { get } from "../../utilities";
@@ -41,6 +42,10 @@ class Skeleton extends Component {
     });
   };
 
+  redirectCreate = () => {
+    window.location.href = "/create/";
+  }
+
   render() {
     let functionsList = null;
     const hasFunctions = this.state.functions.length !== 0;
@@ -66,7 +71,37 @@ class Skeleton extends Component {
           <p> Embrace your inner artsy, math nerd and make drawings with function graphs! Graphiti away!</p>
         </section>
         <section class="u-textCenter">
-         <a href="/create/:userId" className="Get-started">Start Creating!</a>
+        {this.props.userId ? (
+            <GoogleLogout
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={this.props.handleLogout}
+              onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button
+                  className= "Get-started"
+                  onClick={renderProps.onClick}
+                >
+                  Log out
+                </button>
+              )}
+            />
+          ) : (
+            <GoogleLogin
+              clientId={GOOGLE_CLIENT_ID}
+              buttonText="Login"
+              onSuccess={this.props.handleLogin}
+              onFailure={(err) => console.log(err)}
+              render={(renderProps) => (
+                <button
+                  className= "Get-started"
+                  onClick={renderProps.onClick}
+                >
+                  Log in with Google & Start creating! 
+                </button>
+              )}
+            />
+          )}
         </section>
     </div>
       </>
