@@ -67,13 +67,19 @@ class Create extends Component {
     }
     return (
       <>
-       <div>
-          <h1>Let's start creating!</h1>
-          <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito):D.</p>
+       <div className="Create-title">
+        <h1>Let's start creating!</h1>
+        <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito) :D.</p>
        </div>
-        <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode} /> 
-        {functionsList}
-        <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode}/> 
+        <div className="page-layout">
+          <div className="graph-panel">
+            <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode}/> 
+          </div>
+          <div className="function-input">
+            <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode}/> 
+            {functionsList}
+          </div>
+        </div>
         <button
           type="submit"
           className="NewPostInput-button u-pointer"

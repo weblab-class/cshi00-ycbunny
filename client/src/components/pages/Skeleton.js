@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GraphingPanel from "../modules/GraphingPanel.js";
 import NewFunctionInput from "../modules/NewFunctionInput.js";
 import SingleFunction from "../modules/SingleFunction.js";
+import NavBar from "../modules/NavBar.js";
 
 
 import { get } from "../../utilities";
@@ -59,16 +60,15 @@ class Skeleton extends Component {
     }
     return (
       <>
-      <main className = "Grid-background">
+    <div className="Grid-background">
         <div className = "Graphiti-logo"/>
         <section class="u-textCenter">
           <p> Embrace your inner artsy, math nerd and make drawings with function graphs! Graphiti away!</p>
         </section>
-        
         <section class="u-textCenter">
-          <h3>Start Creating!</h3>
+         <a href="/create/:userId" className="Get-started">Start Creating!</a>
         </section>
-      </main>
+    </div>
       </>
     );
   }
