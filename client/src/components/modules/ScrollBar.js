@@ -46,7 +46,7 @@ class ScrollBar extends React.Component {
       functionsList = this.props.functions.map((functionObj) => (
         <Element name= {"s"+functionObj._id+"k"} className="element"
         style={{
-            marginBottom: '200px'
+            marginBottom: '5px'
           }}>
           <SingleFunction
             _id={functionObj._id}
@@ -67,7 +67,6 @@ class ScrollBar extends React.Component {
     // this.scrollToTop({containerId: "containerElemen"});
     return (
       <>
-        {/* <a className="test7" to="test7" onClick={(func) => this.scrollTo(func)} >Scroll to element within container</a> */}
             {functionsList}
       </>
     );

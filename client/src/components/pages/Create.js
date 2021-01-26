@@ -39,6 +39,12 @@ class Create extends Component {
     });
   };
 
+  changeBetweenCartPolar = () => {
+    this.setState({
+      mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian',
+    });
+  };
+
   deleteOldFunction = (id) => {
     this.setState({
       functions: this.state.functions.filter((functionObj) => (
@@ -65,15 +71,7 @@ class Create extends Component {
           </div>
           <div className="function-input">
             <div className="function-and-button">
-              {/* <button
-                type="submit"
-                className="NewPostInput-button u-pointer"
-                value="Submit"
-                onClick={()=>{this.setState({mode: (this.state.mode === 'cartesian') ? 'polar' : 'cartesian'})}}
-              >
-              change
-              </button> */}
-              <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} workId = {this.state.workId} mode = {this.state.mode}/> 
+              <NewFunctionInput defaultText="" addNewFunction = {this.addNewFunction} changeBetweenCartPolar = {this.changeBetweenCartPolar} workId = {this.state.workId} mode = {this.state.mode}/> 
             </div>
             <div className="functionBox" id="scroll-container"> 
               <ScrollBar functions={this.state.functions} position = {this.state.position} deleteOldFunction = {this.deleteOldFunction}/>
