@@ -164,6 +164,7 @@ export default class extends PureComponent {
   };
 
   drawImage = () => {
+    console.log(this.props.imgSrc)
     if (!this.props.imgSrc) return;
 
     // Load the image
@@ -171,6 +172,7 @@ export default class extends PureComponent {
     this.image.src = this.props.imgSrc;
 
     // Draw the image once loaded
+    console.log('3')
     this.image.onload = () =>
       drawImage({ ctx: this.ctx.grid, img: this.image });
   };

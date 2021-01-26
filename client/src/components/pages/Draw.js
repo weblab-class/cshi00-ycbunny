@@ -17,17 +17,9 @@ class Draw extends Component {
     lazyRadius: 0,
     background: null,
     erase: false,
+    background: sessionStorage.getItem("image")
   };
   componentDidMount() {
-    let background = sessionStorage.getItem("image");
-    // if (background == null){
-    //   background = localStorage.getItem("workId");
-    //   get("/api/imageforcoloring", {workId: localStorage.getItem('workId')}).then((img) => {
-    //   background = `data:image/png;base64,${img.data}`
-    //   console.log(background)
-    //   });
-    // }
-    this.setState({ background: background});
   }
 
   handleChangeComplete = (color, event) => {
@@ -94,6 +86,7 @@ class Draw extends Component {
           canvasHeight={this.state.height}
           erase={this.state.erase}
           imgSrc = {this.state.background}
+          immediateLoading = {true}
           saveData = {localStorage.getItem("savedDrawing")}
           className="drawing-panel"
         />
