@@ -33,6 +33,48 @@ class Draw extends Component {
     this.setState({ color: color.hex });
   };
 
+  combineDrawing = (canvasRef) => {
+    const width = canvasRef.props.canvasWidth;
+    const height = canvasRef.props.canvasHeight;
+    const background = canvasRef.canvasContainer.children[3]; 
+    const drawing = canvasRef.canvasContainer.children[1]; 
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    // composite now
+    canvas.getContext('2d').drawImage(background, 0, 0);
+    canvas.getContext('2d').globalAlpha = 1.0; 
+    canvas.getContext('2d').drawImage(drawing, 0, 0);
+
+    const dataUri = canvas.toDataURL('image/jpeg', 1.0);
+    const data = dataUri.split(',')[1];
+    const mimeType = dataUri.split(';')[0].slice(5);
+
+    const bytes = window.atob(data);
+    const buf = new ArrayBuffer(bytes.length);
+    const arr = new Uint8Array(buf);
+
+    for (let i = 0; i < bytes.length; i++) {
+        arr[i] = bytes.charCodeAt(i);
+    }
+
+    const blob = new Blob([arr], { type: mimeType });
+    return { blob: blob, dataUri: dataUri };
+  }
+
+  saveImage = (blob, filename) => {
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = 'display: none';
+
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
   render() {
     return (
       <div>
@@ -114,6 +156,16 @@ class Draw extends Component {
           imgSrc = {this.state.background}
           saveData = {localStorage.getItem("savedDrawing")}
         />
+        <button
+          onClick={() => {
+            // let baseCanvas = this.saveableCanvas.canvasContainer.children[3]; // canvas with background image
+            // let baseCanvasContex = this.saveableCanvas.getContext('2d');
+            // baseCanvasContex.drawImage(canvasRef.current.canvasContainer.children[1], 0, 0); // add drawing
+            // console.log(baseCanvas.toDataURL());
+            // return baseCanvas.toDataURL(); // or whatever
+            this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}
+        > Finished
+        </button> 
       </div>
     );
   }

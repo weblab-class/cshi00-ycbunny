@@ -14,12 +14,6 @@ class MyWorks extends Component {
     }
   }
 
-  handleColor = (e) => {
-    localStorage.setItem("workId", e.target.value.workID);
-    localStorage.removeItem('savedDrawing');
-    sessionStorage.setItem("image", `data:image/png;base64,${e.target.value.image}`);
-    this.setState({redirect: "color"});
-  };
   handleEdit = (workId) => {
     localStorage.setItem("workId", workId.target.value);
     this.setState({redirect: "edit"});
@@ -53,15 +47,7 @@ class MyWorks extends Component {
                 value= {workObj.workId}
                 onClick={this.handleEdit}
                 >
-                Edit
-            </button>
-            <button
-                type="submit"
-                className="NewPostInput-button u-pointer"
-                value= {{workId: workObj.workId, image: workObj.data}}
-                onClick={this.handleColor}
-                >
-                Color
+                Edit & Color
             </button>
         </div>
       ));
