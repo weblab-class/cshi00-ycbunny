@@ -58,7 +58,7 @@ class Draw extends Component {
     const blob = new Blob([arr], { type: mimeType });
     return { blob: blob, dataUri: dataUri };
   }
-  upload = (canvasRef) => {
+  uploadd = (canvasRef) => {
     const width = canvasRef.props.canvasWidth;
     const height = canvasRef.props.canvasHeight;
     const background = canvasRef.canvasContainer.children[3]; 
@@ -81,7 +81,7 @@ class Draw extends Component {
     const arr = new Uint8Array(buf);
 
     post("/api/publish", {image: dataUri});
-    return { blob: blob, dataUri: dataUri };
+    return { dataUri: dataUri };
   }
 
 
@@ -194,7 +194,7 @@ class Draw extends Component {
         <button
           className = "Draw-button finish-container"
           onClick={() => {
-            this.upload}}
+            this.uploadd(this.saveableCanvas)}}
         > Finished
         </button> 
         </div>
