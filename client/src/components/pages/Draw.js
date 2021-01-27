@@ -17,7 +17,8 @@ class Draw extends Component {
     lazyRadius: 0,
     background: null,
     erase: false,
-    background: sessionStorage.getItem("image")
+    background: sessionStorage.getItem("image"),
+    redirect: false
   };
   componentDidMount() {
     localStorage.setItem('progress', "/color/");
@@ -54,10 +55,35 @@ class Draw extends Component {
     for (let i = 0; i < bytes.length; i++) {
         arr[i] = bytes.charCodeAt(i);
     }
-    post("/api/publish", {image: dataUri});
     const blob = new Blob([arr], { type: mimeType });
     return { blob: blob, dataUri: dataUri };
   }
+  upload = (canvasRef) => {
+    const width = canvasRef.props.canvasWidth;
+    const height = canvasRef.props.canvasHeight;
+    const background = canvasRef.canvasContainer.children[3]; 
+    const drawing = canvasRef.canvasContainer.children[1]; 
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    // composite now
+    canvas.getContext('2d').drawImage(drawing, 0, 0);
+    canvas.getContext('2d').globalAlpha = 1.0; 
+    canvas.getContext('2d').drawImage(background, 0, 0);
+
+    const dataUri = canvas.toDataURL("image/png", 1.0);
+    const data = dataUri.split(',')[1];
+    const mimeType = dataUri.split(';')[0].slice(5);
+
+    const bytes = window.atob(data);
+    const buf = new ArrayBuffer(bytes.length);
+    const arr = new Uint8Array(buf);
+
+    post("/api/publish", {image: dataUri});
+    return { blob: blob, dataUri: dataUri };
+  }
+
 
   saveImage = (blob, filename) => {
     localStorage.setItem('character', '');
@@ -74,6 +100,9 @@ class Draw extends Component {
   }
 
   render() {
+    if (this.state.redirect === true){
+      return <Redirect push to={"/graph/"}/>
+    }
     return (
       <div>
         <div className="streamline-bar-color"/>
@@ -151,16 +180,20 @@ class Draw extends Component {
       </div>
         <button
           className = "Draw-button"
+          onClick={() => {
+            this.setState({redirect: true})}}
         > Back
         </button> 
         <button
           className = "Download-button"
+          onClick={() => {
+            this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yayyy')}}
         > Download as PNG
         </button> 
         <button
           className = "Draw-button finish-container"
           onClick={() => {
-            this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}
+            this.upload}}
         > Finished
         </button> 
         </div>
