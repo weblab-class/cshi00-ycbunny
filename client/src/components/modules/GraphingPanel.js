@@ -17,7 +17,7 @@ const math = create(all)
       this.id = 'board_' + Math.random().toString(36).substr(2, 9)
       this.state = { board: null,  initialGraphingFinished: false}
       this.defaultStyle = { width: 500, height: 500 }
-      this.defauflboardAttributes = { axis: true, boundingbox: [-10, 10, 10, -10], 
+      this.defauflboardAttributes = { axis: true, boundingbox: [-15, 15, 15, -15], 
         showScreenshot: true,  renderer: 'canvas',
         showCopyright: false }
       this.curveDic = {}
