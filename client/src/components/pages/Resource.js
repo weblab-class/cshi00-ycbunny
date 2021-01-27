@@ -91,7 +91,7 @@ let Exponential = (brd) => {
  
   var d = brd.create('curve', [
     function(t) { return t;},
-    function (t) { return A.Value()*Math.exp(t + B.Value()) + C.Value(); },
+    function (t) { return A.Value()*Math.cos(t + B.Value()) + C.Value(); },
     -19, 19], { strokeColor: '#aa2233', strokeWidth: 3 });
   brd.unsuspendUpdate();
 }
@@ -110,6 +110,46 @@ let Naturallog = (brd) => {
     function (t) { return A.Value()*Math.log(t + B.Value()) + C.Value(); },
     -19, 19], { strokeColor: '#aa2233', strokeWidth: 3 });
   brd.unsuspendUpdate();
+}
+
+let Spiral = (brd) =>{
+  brd.suspendUpdate();
+  var a = brd.create('slider',[[0,2],[2,2],[0,1,4]], { name: 'a' });
+  var graph = brd.create('curve',
+                       [function(phi){ return a.Value()*phi;},
+                        [0,0],
+                        0, 4*Math.PI],
+                        {strokeWidth: 3 },
+                        {curveType: 'polar'}, );
+  brd.unsuspendUpdate();
+
+}
+
+let Cardioid = (brd) =>{
+  brd.suspendUpdate();
+  var a = brd.create('slider',[[0,2],[2,2],[0,1,4]],{ name: 'a' });
+  var graph = brd.create('curve',
+                       [function(phi){ return a.Value()*(1-Math.cos(phi));},
+                        [1,0],
+                        0, 4*Math.PI],
+                        {strokeWidth: 3 },
+                        {curveType: 'polar'}, );
+  brd.unsuspendUpdate();
+
+}
+
+let Rose = (brd) =>{
+  brd.suspendUpdate();
+  var a = brd.create('slider',[[0,2],[2,2],[0,1,4]], { name: 'a' });
+  var n = brd.create('slider',[[0,4],[2,4],[0,1,4]], { name: 'n' });
+  var graph = brd.create('curve',
+                       [function(phi){ return a.Value()*Math.cos(n.Value()*phi);},
+                        [0,0],
+                        0, 4*Math.PI],
+                        {strokeWidth: 3 },
+                        {curveType: 'polar'}, );
+  brd.unsuspendUpdate();
+
 }
 
 // class Resource extends Component {
@@ -216,6 +256,42 @@ class Resource extends Component {
         </section>
         <JXGBoard
           logic={Naturallog}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
+          style={{
+            border: "3px grey"
+          }} 
+        />
+      </div>
+      <div className= "Resource-graph">
+        <section>
+          <h3>Spiral: r= aθ</h3>
+        </section>
+        <JXGBoard
+          logic={Spiral}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
+          style={{
+            border: "3px grey"
+          }} 
+        />
+      </div>
+      <div className= "Resource-graph">
+        <section>
+          <h3>Cardioid: r= a-acos(θ)</h3>
+        </section>
+        <JXGBoard
+          logic={Cardioid}
+          boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
+          style={{
+            border: "3px grey"
+          }} 
+        />
+      </div>
+      <div className= "Resource-graph">
+        <section>
+          <h3>Rose: r= acos(nθ) (n even, 2n petals; n odd, n petals)</h3>
+        </section>
+        <JXGBoard
+          logic={Rose}
           boardAttributes={{ axis: true, boundingbox: [-12, 10, 12, -10], showCopyright: false }}
           style={{
             border: "3px grey"
