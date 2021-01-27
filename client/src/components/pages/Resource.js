@@ -179,7 +179,7 @@ class Resource extends Component {
         </div>
     <div className = "u-flex u-flexWrap u-flex-justifyCenter">
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Linear: y = Ax + B</h3>
         </section>
         <JXGBoard
@@ -191,7 +191,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Quadratic: y = Ax² + Bx + C</h3>
         </section>
         <JXGBoard
@@ -203,7 +203,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Cubic: y = Ax³ + Bx² + Cx + D</h3>
         </section>
         <JXGBoard
@@ -215,7 +215,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Squareroot: y = A√(x+B) + C</h3>
         </section>
         <JXGBoard
@@ -227,7 +227,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-          <section>
+          <section className="u-space">
             <h3>Cube Root: y = A³√(x+B) + C</h3>
           </section>
         <JXGBoard
@@ -239,8 +239,8 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
-          <h3>Exponential: y = Aˣ⁺ᴮ+C</h3>
+        <section className="u-space">
+          <h3>Sinusoidal Wave: y = Acos(x+B)+C</h3>
         </section>
         <JXGBoard
           logic={Exponential}
@@ -251,7 +251,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Natural Log: y = Aln(x+B)+C</h3>
         </section>
         <JXGBoard
@@ -263,7 +263,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Spiral: r= aθ</h3>
         </section>
         <JXGBoard
@@ -275,7 +275,7 @@ class Resource extends Component {
         />
       </div>
       <div className= "Resource-graph">
-        <section>
+        <section className="u-space">
           <h3>Cardioid: r= a-acos(θ)</h3>
         </section>
         <JXGBoard
