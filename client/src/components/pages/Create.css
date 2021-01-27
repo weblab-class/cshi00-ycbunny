@@ -1,6 +1,12 @@
-.Create-title{
-    padding: var(--s) var(--m)
+.Create-top{
+    padding-left: var(--m);
+    padding-bottom: var(--s);
 }
+
+.Create-title{
+    font-size:40px;
+}
+
 .page-layout{
     display: flex;
     overflow-x: scroll;
@@ -8,19 +14,19 @@
 }
 .graph-panel{
     border: var(--lightgrey) 5px solid;
-    border-radius: 10px;;
+    border-radius: 10px;
 }
 .function-input{
     display:flex;
     flex-direction: column;
-    overflow-x: visible;
+    overflow-x: scroll;
 }
 
 .functionBox {
     border: var(--lightgrey) 5px solid;
     border-radius: 10px;
     padding: 5px;
-    width: 800px;
+    width: 700px;
     height: 450px;
     overflow: scroll;
     }
@@ -48,5 +54,41 @@
     .function-and-button{
         display: inline-block;
         vertical-align: top;
+        border: var(--lightgrey) 5px solid;
+        margin-bottom: 20px;
     }
 
+
+    .streamline-bar-create {
+        background-image: url("../../public/graph.png");
+        width: 550px;
+        height: auto;
+        min-height: 100%;
+        
+        /* div height to be the same as width*/
+        padding-top: 50px;
+        margin-bottom:0;
+        padding-bottom:0;
+
+        
+    
+        /* Centering on image`s center*/
+        background-position-y: center;
+        background-position-x: center;
+
+    
+        /* it makes the clue thing, takes smaller dimension to fill div */
+        background-size: cover;
+    
+        /* it is optional, for making this div centered in parent*/
+        margin: 0 auto;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+    .streamline-bar-create:hover{
+        background-image: url("../../public/graph.gif");
+        opacity: 90%;
+    }
