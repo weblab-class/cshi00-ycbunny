@@ -13,7 +13,7 @@ class Draw extends Component {
     color: "#ffc600",
     width: 500,
     height: 500,
-    brushRadius: 10,
+    brushRadius: 5,
     lazyRadius: 0,
     background: null,
     erase: false,
@@ -36,11 +36,11 @@ class Draw extends Component {
     canvas.height = height;
 
     // composite now
-    canvas.getContext('2d').drawImage(background, 0, 0);
-    canvas.getContext('2d').globalAlpha = 1.0; 
     canvas.getContext('2d').drawImage(drawing, 0, 0);
+    canvas.getContext('2d').globalAlpha = 1.0; 
+    canvas.getContext('2d').drawImage(background, 0, 0);
 
-    const dataUri = canvas.toDataURL('image/jpeg', 1.0);
+    const dataUri = canvas.toDataURL("image/png", 1.0);
     const data = dataUri.split(',')[1];
     const mimeType = dataUri.split(';')[0].slice(5);
 

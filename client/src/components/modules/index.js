@@ -34,7 +34,7 @@ const canvasTypes = [
   },
   {
     name: "grid",
-    zIndex: 10
+    zIndex: 13
   }
 ];
 
@@ -164,7 +164,6 @@ export default class extends PureComponent {
   };
 
   drawImage = () => {
-    console.log(this.props.imgSrc)
     if (!this.props.imgSrc) return;
 
     // Load the image
@@ -172,7 +171,6 @@ export default class extends PureComponent {
     this.image.src = this.props.imgSrc;
 
     // Draw the image once loaded
-    console.log('3')
     this.image.onload = () =>
       drawImage({ ctx: this.ctx.grid, img: this.image });
   };
@@ -288,6 +286,7 @@ export default class extends PureComponent {
     const { x, y } = this.getPointerPos(e);
 
     if (e.touches && e.touches.length > 0) {
+      console.log('3')
       // on touch, set catenary position to touch pos
       this.lazy.update({ x, y }, { both: true });
     }
@@ -563,6 +562,7 @@ export default class extends PureComponent {
     ctx.fillStyle = this.props.catenaryColor;
     ctx.arc(brush.x, brush.y, 2, 0, Math.PI * 2, true);
     ctx.fill();
+    
   };
 
   render() {
