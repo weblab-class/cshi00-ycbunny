@@ -13,7 +13,7 @@ const GOOGLE_CLIENT_ID = "511281853920-t004vd2ldi1trng5tj06ubin80bm6j1h.apps.goo
 class NavBar extends Component {
   constructor(props) {
     super(props);
-  }
+    }
 
   render() {
     return (
@@ -24,13 +24,10 @@ class NavBar extends Component {
             Home
           </Link>
           {this.props.userId && (
-            <Link to="/create/" className="NavBar-link">
+            <Link to="/create" className="NavBar-link">
               Create
             </Link>
           )}
-          {/* <Link to="/create/" className="NavBar-link">
-            Create
-          </Link> */}
           <Link to="/gallery/" className="NavBar-link">
             Gallery
           </Link>

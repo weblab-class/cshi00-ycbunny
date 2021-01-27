@@ -19,7 +19,7 @@ class Select extends Component {
   }
   render() {
     if (this.state.redirect === true){
-      return <Redirect push to="/create"/>;
+      return <Redirect push to="/graph/"/>;
     }
   return (
     <div>

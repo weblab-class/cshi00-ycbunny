@@ -89,7 +89,7 @@ const math = create(all)
     
     render () {
       if (this.state.redirect){
-        return <Redirect push to="/draw"/>;
+        return <Redirect push to="/color/"/>;
       }
       let style = assign(this.defaultStyle, this.props.style || {})
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {

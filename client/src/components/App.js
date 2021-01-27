@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Draw from "./pages/Draw.js";
 import Select from "./pages/Select.js"
+import Direct from "./pages/Redirect.js"
 
 import "../utilities.css";
 
@@ -67,7 +68,7 @@ class App extends Component {
             userId={this.state.userId}
           />
           <Create
-           path="/create/"
+           path="/graph/"
            handleLogin={this.handleLogin}
            handleLogout={this.handleLogout}
            userId={this.state.userId}
@@ -87,7 +88,7 @@ class App extends Component {
           />
 
           <Draw
-            path="/draw/"
+            path="/color/"
             handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
             userId={this.state.userId}
@@ -100,6 +101,12 @@ class App extends Component {
           />
           <Select
             path="/select/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
+          <Direct
+            path="/create/"
             handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
             userId={this.state.userId}

@@ -31,6 +31,7 @@ class Create extends Component {
     get("/api/functions", {workId: this.state.workId}).then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });
+    localStorage.setItem('progress', "/graph/");
   }
 
   addNewFunction = (functionObj) => {

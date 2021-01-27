@@ -28,6 +28,10 @@ class Skeleton extends Component {
     get("/api/functions").then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });
+    const progress = localStorage.getItem(progress)
+    if (progress == null){
+        localStorage.setItem('progress', "/select/")
+    }
   }
 
   addNewFunction = (functionObj) => {
@@ -46,7 +50,8 @@ class Skeleton extends Component {
 
   render() {
     if (this.props.userId && this.state.redirect === true) {
-      return <Redirect push to="/create/"/>;
+      return <Redirect push to={localStorage.getItem('progress')
+    }/>;
     }
     return (
       <>

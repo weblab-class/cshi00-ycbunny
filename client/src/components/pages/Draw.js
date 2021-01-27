@@ -20,7 +20,9 @@ class Draw extends Component {
     background: sessionStorage.getItem("image")
   };
   componentDidMount() {
+    localStorage.setItem('progress', "/color/");
   }
+
 
   handleChangeComplete = (color, event) => {
     this.setState({ color: color.hex });
@@ -58,6 +60,8 @@ class Draw extends Component {
   }
 
   saveImage = (blob, filename) => {
+    console.log('1');
+    localStorage.setItem('progress', "/select/");
     const a = document.createElement('a');
     document.body.appendChild(a);
     a.style = 'display: none';
