@@ -4,6 +4,7 @@ import NewFunctionInput from "../modules/NewFunctionInput.js";
 import SingleFunction from "../modules/SingleFunction.js";
 import NavBar from "../modules/NavBar.js";
 import GoogleLogin, { GoogleLogout } from "react-google-login";
+import { Redirect } from "@reach/router";
 
 
 import { get } from "../../utilities";
@@ -16,6 +17,9 @@ const GOOGLE_CLIENT_ID = "511281853920-t004vd2ldi1trng5tj06ubin80bm6j1h.apps.goo
 class Skeleton extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      redirect: false
+    }
     // Initialize Default State
   }
 
@@ -39,11 +43,11 @@ class Skeleton extends Component {
     });
   };
 
-  redirectCreate = () => {
-    window.location.href = "/create/";
-  }
 
   render() {
+    if (this.props.userId && this.state.redirect === true) {
+      return <Redirect push to="/create/"/>;
+    }
     return (
       <>
     <div className="Grid-background">
@@ -71,7 +75,7 @@ class Skeleton extends Component {
             <GoogleLogin
               clientId={GOOGLE_CLIENT_ID}
               buttonText="Login"
-              onSuccess={this.props.handleLogin}
+              onSuccess={(obj)=>{this.props.handleLogin(obj); this.setState({redirect: true})}}
               onFailure={(err) => console.log(err)}
               render={(renderProps) => (
                 <button
