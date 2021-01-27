@@ -1,0 +1,20 @@
+.character-name{
+    font-family: "Comfortaa";
+    font-size: 15px;
+    color: var(--darkgrey);
+}
+
+.character-button{
+    border: var(--lightgrey) 5px solid;
+    border-radius: 5px;
+    background-color: var(--offwhite);
+}
+
+.character-button:hover{
+    background-color: var(--orange);
+}
+
+.organization{
+    margin: 10px;
+}
+

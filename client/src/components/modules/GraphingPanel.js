@@ -6,6 +6,7 @@ import assign from 'lodash/assign';
 import { post } from "../../utilities";
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import CHARACTERS from './Characters';
+import HALFCHARACTERS from './halfCharacters';
 
 
 const math = create(all)
@@ -58,7 +59,7 @@ const math = create(all)
       this.setState({
         board: board
       })
-      var image = board.create('image',[CHARACTERS[localStorage.getItem('character')], [-1,-1], [3,3] ]);
+      var image = board.create('image',[HALFCHARACTERS[localStorage.getItem('character')], [-15,-15], [30,30] ]);
       this.setState({background: image});
     }
 

@@ -4,6 +4,8 @@ import { get } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
 import CHARACTERS from "../modules/Characters";
+import "./Select.css";
+import "../../utilities.css";
 
 class Select extends Component {
   constructor(props) {
@@ -23,14 +25,19 @@ class Select extends Component {
     }
   return (
     <div>
+      <div className="Gallery-titletext">
+          <h1>Pick a Character</h1>
+          <p>Select a cartoon to use as reference. If you are feeling extra creative, choose the first option and design your character from scratch! </p>
+      </div>
     {this.state.keys.map((key) => (
       <button
           type="submit"
-          className="NewPostInput-button u-pointer"
+          className="character-button organization u-pointer"
           value="Submit"
           onClick={()=>{return this.handleStartNew(key)}}
         >
           <img src = {CHARACTERS[key]}/>
+          <div className="character-name u-bold">{key}</div>
         </button>
         ))}
     </div>

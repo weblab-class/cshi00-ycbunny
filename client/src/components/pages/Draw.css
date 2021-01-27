@@ -77,7 +77,7 @@
 }
 
 
-.streamline-bar-create {
+.streamline-bar-color {
     background-image: url("../../public/color.png");
     width: 550px;
     height: auto;
@@ -106,7 +106,16 @@
     bottom: 0;
   }
 
-.streamline-bar-create:hover{
+.streamline-bar-color:hover{
     background-image: url("../../public/color.gif");
     opacity: 90%;
+}
+
+.Color-top{
+    padding-left: var(--m);
+    padding-bottom: var(--s);
+}
+
+.Color-title{
+    font-size:32px;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../../utilities.css";
 import { get } from "../../utilities";
+import "./Gallery.css";
+
 
 
 class Gallery extends Component {
@@ -27,12 +29,15 @@ class Gallery extends Component {
         <img src = {`data:image/png;base64,${workObj.data}`} alt="a"/>
       ));
     } else {
-      worksList = <div>Waiting for your creativity...</div>;
+      worksList = <div>Waiting for your creativity to load...</div>;
     }
-    return (
-      <div>
-        <h1>Graphiti Wall</h1>
+    return (<div>
+        <div className="Gallery-titletext">
+          <h1>Graphiti Wall</h1>
+        </div>
+      <div className="u-flex-justifyCenter u-flex u-flexWrap">
         {worksList}
+      </div>
       </div>
     );
   }

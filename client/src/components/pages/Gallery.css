@@ -1,0 +1,11 @@
+.Gallery-titletext{
+    padding: var(--s) var(--m);
+}
+
+.Galleryborder{
+    border: var(--lightgrey) solid, 5px;
+    border-radius: 5px;
+    width: auto;
+    size: auto;
+
+}
