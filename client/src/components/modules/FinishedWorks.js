@@ -3,6 +3,7 @@ import "../../utilities.css";
 import { get, post } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
+import "./SavedWorks.css";
 
 class FinishedWorks extends Component {
   constructor(props) {
@@ -49,9 +50,13 @@ class FinishedWorks extends Component {
       worksList = <div>Waiting for your creativity...</div>;
     }
     return (
-      <div>
-        <h1>Graphiti Wall</h1>
+      <div >
+        <div className="Mywork-titletext">
+        <h1>Finished Graphiti</h1>
+        </div>
+        <div className="u-flex">
         {worksList}
+        </div>
       </div>
     );
   }

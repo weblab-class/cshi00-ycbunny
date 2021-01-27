@@ -109,6 +109,7 @@ class Draw extends Component {
         <div className="Color-top">
           <div className="Color-title u-bold">Give me some color!</div>
           <p>Customize your graphiti as your heart desires!</p>
+          <p>Sign your name to complete that graphiti tag :D!</p>
         </div>
       <div className="page-layout">
         <CanvasDraw
