@@ -63,8 +63,8 @@ const math = create(all)
     }
 
     saveImage = (board) => {
-      console.log(this.props.workId);
-      post("/api/saveBoard", {board: board, workId: this.props.workId, character: localStorage.getItem('character')});
+      let c = localStorage.getItem('character')
+      post("/api/saveBoard", {board: board, workId: this.props.workId, char: c});
     };
   
     handleSave = () => {

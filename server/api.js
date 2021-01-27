@@ -59,10 +59,17 @@ router.get("/works", (req, res) => {
    )); 
   });
 
+router.get("/savedworks", (req, res) => {
+    // empty selector means get all documents
+    FunctionFinishedImg.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
+      return {data: func.data.toString('base64'), workId: func.workId, character: func.character }})
+      )); 
+    });
+
 router.get("/myworks", (req, res) => {
   // empty selector means get all documents
   Img.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
-    return {creator_name: func.creator_name, data: func.data.toString('base64'), workId: func.workId }})
+    return {creator_name: func.creator_name, data: func.data.toString('base64'), workId: func.workId, _id: String(func._id)}})
     )); 
   });
 
@@ -85,6 +92,14 @@ router.post("/functiondelete", auth.ensureLoggedIn, (req) => {
   Func.deleteOne({_id:ObjectId(req.body.id)}).then((student) => console.log(req.body.id));
   });
 
+router.post("/sdelete", auth.ensureLoggedIn, (req) => {
+  FunctionFinishedImg.deleteOne({workId: req.body.workId}).then((student) => console.log(req.body.id));
+  });
+
+router.post("/worksdelete", auth.ensureLoggedIn, (req) => {
+  Img.deleteOne({_id:ObjectId(req.body.id)}).then((student) => console.log(req.body.id));
+  });
+
 router.post("/saveBoard", auth.ensureLoggedIn, (req, res) => {
   var image = req.body.board;
   var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
@@ -93,9 +108,11 @@ router.post("/saveBoard", auth.ensureLoggedIn, (req, res) => {
     creator_name: req.user.name,
     data: data,
     workId: req.body.workId,
-    character: req.body.character
+    character: req.body.char
   })
-  img.save()
+  FunctionFinishedImg.findOne({workId: req.body.workId}).then((image) => {if (image == null) {img.save()}
+  else {image.data = data; image.save()}
+  })
 });
 
 router.post("/publish", auth.ensureLoggedIn, (req, res) => {
@@ -125,3 +142,4 @@ router.all("*", (req, res) => {
 });
 
 module.exports = router;
+

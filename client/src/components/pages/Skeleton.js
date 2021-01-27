@@ -28,7 +28,7 @@ class Skeleton extends Component {
     get("/api/functions").then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });
-    const progress = localStorage.getItem(progress)
+    const progress = localStorage.getItem("progress")
     if (progress == null){
         localStorage.setItem('progress', "/select/")
     }

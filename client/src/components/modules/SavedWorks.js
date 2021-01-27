@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../utilities.css";
-import { get } from "../../utilities";
+import { get, post } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
 
@@ -14,9 +14,16 @@ class SavedWorks extends Component {
   }
 
   handleEdit = (workId) => {
-    localStorage.setItem("workId", workId.target.value.workId);
-    localStorage.setItem("character", workId.target.value.character);
+    var n = workId.target.value.indexOf(",");
+    localStorage.setItem("workId", workId.target.value.slice(0,n));
+    localStorage.setItem("character", workId.target.value.slice(n+1));
+    console.log(workId.target.value.slice(0,n))
     this.setState({redirect: true});
+  };
+
+  handleDelete = (event) => {
+    event.preventDefault();
+    post("/api/sdelete", {workId: event.target.value});
   };
 
   componentDidMount() {
@@ -27,7 +34,7 @@ class SavedWorks extends Component {
       });
     });
   }
-  
+
   render() {
     console.log(this.state.works)
     if (this.state.redirect === true){
@@ -42,10 +49,18 @@ class SavedWorks extends Component {
             <button
                 type="submit"
                 className="NewPostInput-button u-pointer"
-                value= {{workId: workObj.workId, character: workObj.character}}
+                value= {[workObj.workId, workObj.character]}
                 onClick={this.handleEdit}
                 >
                 Edit & Color
+            </button>
+            <button
+                type="submit"
+                className="NewPostInput-button u-pointer"
+                value= {workObj.workId}
+                onClick={this.handleDelete}
+                >
+                Delete
             </button>
         </div>
       ));
@@ -61,4 +76,4 @@ class SavedWorks extends Component {
   }
 }
 
-export default MyWorks;
+export default SavedWorks;

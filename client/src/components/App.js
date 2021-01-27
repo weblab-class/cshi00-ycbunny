@@ -16,6 +16,8 @@ import Create from "./pages/Create.js";
 import Gallery from "./pages/Gallery.js";
 import Resource from "./pages/Resource.js";
 import MyWorks from "./pages/MyWorks.js";
+import SavedWorks from "./modules/SavedWorks.js";
+import FinishedWorks from "./modules/FinishedWorks.js";
 
 /**
  * Define the "App" component as a class.
@@ -107,6 +109,18 @@ class App extends Component {
           />
           <Direct
             path="/create/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
+          <SavedWorks
+            path="/a/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
+          <FinishedWorks
+            path="/b/"
             handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
             userId={this.state.userId}

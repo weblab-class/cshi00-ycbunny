@@ -14,10 +14,6 @@ class Create extends Component {
     super(props);
     // Initialize Default State
     let workId = localStorage.getItem('workId');
-    if (workId == null){
-      localStorage.setItem('workId', "0");
-      workId = "0";
-    }
     this.state = {
       workId: workId,
       functions: [],
@@ -27,7 +23,6 @@ class Create extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.workId);
     get("/api/functions", {workId: this.state.workId}).then((functionObjs) => {
       this.setState({ functions: functionObjs.reverse() });
     });

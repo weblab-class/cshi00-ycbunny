@@ -6,6 +6,7 @@ const FunctionFinishedImgSchema = new mongoose.Schema({
     creator_name: String,
     workId: String,
     data: Buffer,
+    character: String,
 });
 
 // compile model from schema

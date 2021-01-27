@@ -19,6 +19,15 @@ class Select extends Component {
   }
   render() {
     if (this.state.redirect === true){
+      let totalWork = localStorage.getItem('totalWork');
+      if (totalWork == null){
+        localStorage.setItem('totalWork', "1");
+        localStorage.setItem('workId', "1");
+      }
+      else{
+        localStorage.setItem('totalWork', String(Number(totalWork)+1));
+        localStorage.setItem('workId', String(Number(totalWork)+1));
+      }
       return <Redirect push to="/graph/"/>;
     }
   return (
