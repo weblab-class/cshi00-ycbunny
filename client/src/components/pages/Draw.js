@@ -150,6 +150,14 @@ class Draw extends Component {
         </div>
       </div>
         <button
+          className = "Draw-button"
+        > Back
+        </button> 
+        <button
+          className = "Download-button"
+        > Download as PNG
+        </button> 
+        <button
           className = "Draw-button finish-container"
           onClick={() => {
             this.saveImage(this.combineDrawing(this.saveableCanvas).blob, 'yeah')}}

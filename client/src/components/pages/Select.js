@@ -34,9 +34,11 @@ class Select extends Component {
     }
   return (
     <div>
-      <div className="Gallery-titletext">
-          <h1>Pick a Character</h1>
-          <p>Select a cartoon to use as reference. If you are feeling extra creative, choose the first option and design your character from scratch! </p>
+      <div className="streamline-bar-select"/>
+      <div className="Select-top">
+          <div className="Select-title">Pick a Character</div>
+          <p>You are just 3 steps away from publishing your graphiti!</p>
+          <p>Select a cartoon to use as reference. Use the contours to guide you as you graph functions to bring your character to life. If you are feeling extra creative, choose the first option and fill the void with your own design! </p>
       </div>
     {this.state.keys.map((key) => (
       <button

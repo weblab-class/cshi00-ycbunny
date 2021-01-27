@@ -117,7 +117,7 @@ class NewFunctionInput extends Component {
             value="Submit"
             onClick={this.handleSubmit}
           >
-            ✅
+            ✔
           </button>
         </div>
       );
@@ -171,7 +171,7 @@ class NewFunctionInput extends Component {
           value="Submit"
           onClick={this.handleSubmit}
         >
-          ✅
+          ✔
         </button>
       </div>
     );

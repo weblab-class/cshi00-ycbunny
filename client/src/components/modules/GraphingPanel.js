@@ -7,6 +7,7 @@ import { post } from "../../utilities";
 import { Link, DirectLink, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll';
 import CHARACTERS from './Characters';
 import HALFCHARACTERS from './halfCharacters';
+import "./GraphingPanel.css";
 
 
 const math = create(all)
@@ -137,6 +138,11 @@ const math = create(all)
       return (
         <>
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
+          <button
+          className="NewPostInput-button u-pointer u-bold restart "
+          >
+            Restart
+          </button>
           <button
           type="submit"
           className="NewPostInput-button u-pointer u-bold"

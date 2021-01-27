@@ -35,6 +35,7 @@
 .checkmark-button{
   border: var(--lightgrey) 2px solid;
   border-radius: 5px;
+  font-size: 20px;
 }
 
 .checkmark-button:hover{
