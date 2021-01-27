@@ -24,6 +24,7 @@ class Draw extends Component {
 
   handleChangeComplete = (color, event) => {
     this.setState({ color: color.hex });
+    this.setState({erase: false})
   };
 
   combineDrawing = (canvasRef) => {
@@ -99,7 +100,7 @@ class Draw extends Component {
         <button
           className = "Draw-button eraser-container"
           onClick={() => {
-            this.setState({ color: "#FFFFFF"}
+            this.setState({ erase: (this.state.erase === true) ? false : true }
             );
           }}
         > Eraser
