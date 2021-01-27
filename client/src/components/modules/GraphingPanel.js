@@ -68,15 +68,21 @@ const math = create(all)
       let c = localStorage.getItem('character')
       post("/api/saveBoard", {board: board, workId: this.props.workId, char: c});
     };
-  
+    
+    handleRestart = () =>{
+      this.setState(
+        {redirect: "back"}
+      )
+    };
     handleSave = () => {
       this.state.board.removeObject(this.state.background);
       this.state.board.setBoundingBox([-15, 15, 15, -15]);
       const base64 = this.state.board.renderer.canvasRoot.toDataURL();
       sessionStorage.setItem("image", base64);
       this.saveImage(base64);
-      this.setState({redirect: true});
+      this.setState({redirect: "next"});
     };
+
 
     create = (func) => {
       if (func.mode === "cartesian"){
@@ -91,8 +97,11 @@ const math = create(all)
     }
     
     render () {
-      if (this.state.redirect){
+      if (this.state.redirect === "next"){
         return <Redirect push to="/color/"/>;
+      }
+      else if (this.state.redirect === "back"){
+        return <Redirect push to="/select/"/>;
       }
       let style = assign(this.defaultStyle, this.props.style || {})
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
@@ -139,7 +148,10 @@ const math = create(all)
         <>
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
           <button
-          className="restart-pos NewPostInput-button u-pointer u-bold"
+          type="submit"
+          className="NewPostInput-button u-pointer u-bold restart "
+          value="Submit"
+          onClick={this.handleRestart}
           >
             Restart
           </button>
