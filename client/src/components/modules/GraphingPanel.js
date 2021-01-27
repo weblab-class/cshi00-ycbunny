@@ -85,6 +85,7 @@ const math = create(all)
 
 
     create = (func) => {
+      try{
       if (func.mode === "cartesian"){
         return (this.state.board.create('curve', [function(t){return t;},
           function(t){return math.evaluate(func.exp,{x:t});}, math.evaluate(func.leftRange), 
@@ -93,6 +94,9 @@ const math = create(all)
       if (func.mode === "polar"){
         return(this.state.board.create('curve', [function(t){return math.evaluate(func.exp,{theta:t});},
           [Number(func.origin[1]), Number(func.origin[4])],math.evaluate(func.leftRange),math.evaluate(func.rightRange)], { strokeColor: '#000000', strokeWidth: 7 }))
+      }}
+      catch{
+        return "err"
       }
     }
     

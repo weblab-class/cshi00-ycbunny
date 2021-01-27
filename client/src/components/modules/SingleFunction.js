@@ -40,7 +40,8 @@ class SingleFunction extends Component {
       let tex = math.parse("y = "+this.props.exp).toTex()
       return(
         <div className="Each-function" >
-        <MathJax config= {{display: "inline"}} math={"$"+ tex + "$" + "\t" +"x from " + this.props.leftRange +" to "+ this.props.rightRange} />
+        <MathJax config= {{display: "inline"}} math={"$"+ tex + "$"} />
+        <span> {"x from " + this.props.leftRange +" to "+ this.props.rightRange}</span>
         <button
           type="submit"
           className="SingleFunction-button u-pointer"
