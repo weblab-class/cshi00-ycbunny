@@ -31,7 +31,9 @@ class NewFunctionInput extends Component {
     const body = {exp: a, leftRange: b, rightRange: c, workId: d, mode: f, origin: e};
     post("/api/function", body).then((func) => {
       // display this story on the screen
-      this.props.addNewFunction(func);
+      if (a.length > 0){
+        this.props.addNewFunction(func);
+      }
     });
   };
 

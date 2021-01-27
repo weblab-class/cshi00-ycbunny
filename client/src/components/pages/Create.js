@@ -42,6 +42,7 @@ class Create extends Component {
   };
 
   deleteOldFunction = (id) => {
+    console.log('s')
     this.setState({
       functions: this.state.functions.filter((functionObj) => (
         functionObj._id!=id))
@@ -54,6 +55,7 @@ class Create extends Component {
     });
   };
 
+
   render() {
     return (
       <>
@@ -65,7 +67,7 @@ class Create extends Component {
        </div>
         <div className="page-layout">
           <div className="graph-panel">
-            <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode} changePosition = {this.changePosition}/> 
+            <GraphingPanel functions = {this.state.functions} workId ={this.state.workId} mode = {this.state.mode} changePosition = {this.changePosition} deleteF = {this.deleteOldFunction}/> 
           </div>
           <div className="function-input">
             <div className="function-and-button">

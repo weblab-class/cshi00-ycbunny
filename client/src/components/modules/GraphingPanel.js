@@ -84,7 +84,7 @@ const math = create(all)
     };
 
 
-    create = (func) => {
+    create = (func, id) => {
       try{
       if (func.mode === "cartesian"){
         return (this.state.board.create('curve', [function(t){return t;},
@@ -96,7 +96,8 @@ const math = create(all)
           [Number(func.origin[1]), Number(func.origin[4])],math.evaluate(func.leftRange),math.evaluate(func.rightRange)], { strokeColor: '#000000', strokeWidth: 7 }))
       }}
       catch{
-        return "err"
+        console.log('er');
+        this.props.deleteF(id);
       }
     }
     
@@ -111,16 +112,18 @@ const math = create(all)
       if (this.state.board !== null && this.props.functions.length>0 && this.state.initialGraphingFinished ===false) {
         this.state.board.suspendUpdate();
         this.props.functions.map((functionObj) => (
-          this.curveDic[functionObj._id] = this.create(functionObj)));
+          this.curveDic[functionObj._id] = this.create(functionObj, functionObj._id)));
         var keys = Object.keys(this.curveDic);
         let changePosition = this.props.changePosition;
         let dic = this.curveDic;
         let scrollToWithContainer = this.scrollToWithContainer
         keys.forEach(function(key){
-          dic[key].on('mousedown', function () {
-            // changePosition(key);
-            scrollToWithContainer("s"+key+"k")
-          })
+          if (dic[key]!= null){
+            dic[key].on('mousedown', function () {
+              // changePosition(key);
+              scrollToWithContainer("s"+key+"k")
+            })
+          }
         });
         this.state.board.unsuspendUpdate()
         this.setState({
@@ -137,9 +140,9 @@ const math = create(all)
         if (newCurve !== null && newCurve.length !== 0){
           let c = this.create(newCurve[0]);
           let changePosition = this.props.changePosition
-          c.on('mousedown', function () {
+          if (dic[key]!= null){ c.on('mousedown', function () {
             changePosition(newCurve[0]._id)
-          });
+          });}
           this.curveDic[newCurve[0]._id] = c;
         }
         else if (remove !== null && remove.length !== 0) {
