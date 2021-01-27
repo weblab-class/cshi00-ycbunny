@@ -59,6 +59,8 @@ class Draw extends Component {
     return { blob: blob, dataUri: dataUri };
   }
   uploadd = (canvasRef) => {
+    localStorage.setItem('character', '');
+    localStorage.setItem('progress', "/select/");
     const width = canvasRef.props.canvasWidth;
     const height = canvasRef.props.canvasHeight;
     const background = canvasRef.canvasContainer.children[3]; 
