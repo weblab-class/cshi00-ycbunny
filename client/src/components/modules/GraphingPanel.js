@@ -140,10 +140,10 @@ const math = create(all)
         if (newCurve !== null && newCurve.length !== 0){
           let c = this.create(newCurve[0]);
           let changePosition = this.props.changePosition
-          if (dic[key]!= null){ c.on('mousedown', function () {
+          if (c!= null){ c.on('mousedown', function () {
             changePosition(newCurve[0]._id)
-          });}
-          this.curveDic[newCurve[0]._id] = c;
+          });
+          }
         }
         else if (remove !== null && remove.length !== 0) {
           console.log(remove[0]);
