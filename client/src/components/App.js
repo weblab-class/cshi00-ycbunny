@@ -127,11 +127,8 @@ class App extends Component {
             handleLogout={this.handleLogout}
             userId={this.state.userId}
           />
-<<<<<<< HEAD
-=======
 
           <NotFound default />
->>>>>>> 72c55a4c31802128a4b99df8ebb1980a8f5a7529
         </Router>
       </>
     );
