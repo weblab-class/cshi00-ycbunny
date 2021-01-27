@@ -4,7 +4,7 @@ import { get } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
 
-class MyWorks extends Component {
+class SavedWorks extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,15 +18,16 @@ class MyWorks extends Component {
     localStorage.setItem("character", workId.target.value.character);
     this.setState({redirect: true});
   };
+
   componentDidMount() {
-    document.title = "My Works";
-    get("/api/myworks").then((workObjs) => {
+    get("/api/savedworks").then((workObjs) => {
       let reversedWorkObjs = workObjs.reverse();
       reversedWorkObjs.map((workObj) => {
         this.setState({ works: this.state.works.concat([workObj]) });
       });
     });
   }
+  
   render() {
     console.log(this.state.works)
     if (this.state.redirect === true){

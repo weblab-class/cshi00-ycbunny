@@ -14,7 +14,7 @@ class Select extends Component {
     }
   }
   handleStartNew = (char) => {
-    sessionStorage.setItem("character", char);
+    localStorage.setItem("character", char);
     this.setState({redirect: true});
   }
   render() {

@@ -21,7 +21,7 @@ const Func = require("./models/functioninput");
 
 const FunctionFinishedImg = require("./models/functionFinishedImg");
 
-const fs = require('fs');
+const Img = require("./models/work");
 
 const ObjectId = require('mongodb').ObjectID;
 
@@ -54,14 +54,14 @@ router.get("/functions", auth.ensureLoggedIn, (req, res) => {
 
 router.get("/works", (req, res) => {
   // empty selector means get all documents
-  FunctionFinishedImg.find({}).then((funcs)=> res.send(funcs.map((func) => {
+  Img.find({}).then((funcs)=> res.send(funcs.map((func) => {
     return {creator_name: func.creator_name, data: func.data.toString('base64') }})
    )); 
   });
 
 router.get("/myworks", (req, res) => {
   // empty selector means get all documents
-  FunctionFinishedImg.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
+  Img.find({creator_id: req.user._id}).then((funcs)=> res.send(funcs.map((func) => {
     return {creator_name: func.creator_name, data: func.data.toString('base64'), workId: func.workId }})
     )); 
   });
@@ -92,21 +92,23 @@ router.post("/saveBoard", auth.ensureLoggedIn, (req, res) => {
     creator_id: req.user._id ,
     creator_name: req.user.name,
     data: data,
-    workId: req.body.workId
+    workId: req.body.workId,
+    character: req.body.character
   })
   img.save()
 });
 
 router.post("/publish", auth.ensureLoggedIn, (req, res) => {
-  var image = req.body.board;
+  var image = req.body.image;
   var data = new Buffer(image.replace(/^data:image\/\w+;base64,/, ''), "base64")
-  const img = new FunctionFinishedImg({
+  const img = new Img({
     creator_id: req.user._id ,
     creator_name: req.user.name,
     data: data,
   })
   img.save()
 });
+
 
 router.get("/imageforcoloring", (req, res) => {
   // empty selector means get all documents
@@ -115,14 +117,6 @@ router.get("/imageforcoloring", (req, res) => {
     )) 
 });
 
-
-router.post("/download", auth.ensureLoggedIn, (req, res) => {
-  var image = req.body.board;
-  var data = image.replace(/^data:image\/\w+;base64,/, '');
-  fs.writeFile("out.png", data, {encoding: 'base64'}, function(err){
-    console.log(err);
-  });
-});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

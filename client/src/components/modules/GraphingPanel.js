@@ -15,7 +15,7 @@ const math = create(all)
       this.id = 'board_' + Math.random().toString(36).substr(2, 9)
       this.state = { board: null,  initialGraphingFinished: false}
       this.defaultStyle = { width: 500, height: 500 }
-      this.defauflboardAttributes = { axis: true, boundingbox: [-12, 10, 12, -10], 
+      this.defauflboardAttributes = { axis: true, boundingbox: [-15, 15, 15, -15], 
         showScreenshot: true,  renderer: 'canvas',
         showCopyright: false }
       this.curveDic = {}
@@ -58,16 +58,17 @@ const math = create(all)
       this.setState({
         board: board
       })
-      var image = board.create('image',[CHARACTERS.bird, [-1,-1], [3,3] ]);
+      var image = board.create('image',[CHARACTERS[localStorage.getItem('character')], [-1,-1], [3,3] ]);
       this.setState({background: image});
     }
 
     saveImage = (board) => {
       console.log(this.props.workId);
-      post("/api/saveBoard", {board: board, workId: this.props.workId});
+      post("/api/saveBoard", {board: board, workId: this.props.workId, character: localStorage.getItem('character')});
     };
   
     handleSave = () => {
+      this.state.board.setBoundingBox([-15, 15, 15, -15]);
       this.state.board.removeObject(this.state.background);
       const base64 = this.state.board.renderer.canvasRoot.toDataURL();
       sessionStorage.setItem("image", base64);

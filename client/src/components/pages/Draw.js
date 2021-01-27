@@ -5,7 +5,7 @@ import { render } from "react-dom";
 import CanvasDraw from '../modules/index';
 import classNames from "./Draw.css";
 import { CirclePicker } from 'react-color';
-import { get } from "../../utilities";
+import { post } from "../../utilities";
 
 
 class Draw extends Component {
@@ -54,13 +54,13 @@ class Draw extends Component {
     for (let i = 0; i < bytes.length; i++) {
         arr[i] = bytes.charCodeAt(i);
     }
-
+    post("/api/publish", {image: dataUri});
     const blob = new Blob([arr], { type: mimeType });
     return { blob: blob, dataUri: dataUri };
   }
 
   saveImage = (blob, filename) => {
-    console.log('1');
+    localStorage.setItem('character', '');
     localStorage.setItem('progress', "/select/");
     const a = document.createElement('a');
     document.body.appendChild(a);
