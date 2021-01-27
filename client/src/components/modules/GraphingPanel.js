@@ -68,8 +68,8 @@ const math = create(all)
     };
   
     handleSave = () => {
-      this.state.board.setBoundingBox([-15, 15, 15, -15]);
       this.state.board.removeObject(this.state.background);
+      this.state.board.setBoundingBox([-15, 15, 15, -15]);
       const base64 = this.state.board.renderer.canvasRoot.toDataURL();
       sessionStorage.setItem("image", base64);
       this.saveImage(base64);
