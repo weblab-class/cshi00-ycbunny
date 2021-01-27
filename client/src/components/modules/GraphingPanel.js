@@ -139,7 +139,7 @@ const math = create(all)
         <>
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
           <button
-          className="NewPostInput-button u-pointer u-bold restart "
+          className="restart-pos NewPostInput-button u-pointer u-bold"
           >
             Restart
           </button>

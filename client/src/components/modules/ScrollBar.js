@@ -2,12 +2,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import Scroll from 'react-scroll';
 import SingleFunction from "../modules/SingleFunction.js";
+import "./ScrollBar.css";
+
 
 var Link = Scroll.Link;
 var Element = Scroll.Element;
 //var Events = Scroll.Events;
 var scroll = Scroll.animateScroll;
 var scroller = Scroll.scroller;
+
 
 const styles = {
   fontFamily: 'sans-serif',
@@ -46,7 +49,7 @@ class ScrollBar extends React.Component {
       functionsList = this.props.functions.map((functionObj) => (
         <Element name= {"s"+functionObj._id+"k"} className="element"
         style={{
-            marginBottom: '5px'
+            marginBottom: '15px'
           }}>
           <SingleFunction
             _id={functionObj._id}
@@ -66,9 +69,11 @@ class ScrollBar extends React.Component {
     }
     // this.scrollToTop({containerId: "containerElemen"});
     return (
-      <>
+      <div>
             {functionsList}
-      </>
+            <div className="emptyspace"/>
+
+      </div>
     );
   }
 };

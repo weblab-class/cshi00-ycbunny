@@ -47,7 +47,7 @@ class SingleFunction extends Component {
           value="Submit"
           onClick={this.handleDelete}
         >
-        ❌
+        ✘
         </button>
       </div>
       )
@@ -65,7 +65,7 @@ class SingleFunction extends Component {
           value="Submit"
           onClick={this.handleDelete}
         >
-        ❌
+        ✘
         </button>
       </div>
       )

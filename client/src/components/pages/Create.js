@@ -61,6 +61,7 @@ class Create extends Component {
        <div className="Create-top">
         <div className="u-bold Create-title">Let's start creating!</div>
         <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito) :D.</p>
+        <p>Note: click on a graph and the corresponding function will be scrolled to the top! </p>
        </div>
         <div className="page-layout">
           <div className="graph-panel">

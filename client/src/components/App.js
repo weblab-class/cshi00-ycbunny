@@ -7,6 +7,7 @@ import Draw from "./pages/Draw.js";
 import Select from "./pages/Select.js"
 import Direct from "./pages/Redirect.js"
 
+
 import "../utilities.css";
 
 import { socket } from "../client-socket.js";
@@ -18,6 +19,7 @@ import Resource from "./pages/Resource.js";
 import MyWorks from "./pages/MyWorks.js";
 import SavedWorks from "./modules/SavedWorks.js";
 import FinishedWorks from "./modules/FinishedWorks.js";
+
 
 /**
  * Define the "App" component as a class.
@@ -125,6 +127,7 @@ class App extends Component {
             handleLogout={this.handleLogout}
             userId={this.state.userId}
           />
+
           <NotFound default />
         </Router>
       </>
