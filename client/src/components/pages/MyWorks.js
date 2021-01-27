@@ -3,7 +3,6 @@ import "../../utilities.css";
 import { get } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
-import "./MyWorks.css";
 import FinishedWorks from "../modules/FinishedWorks.js";
 import SavedWorks from "../modules/SavedWorks.js";
 
