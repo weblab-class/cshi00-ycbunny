@@ -3,64 +3,39 @@ import "../../utilities.css";
 import { get } from "../../utilities";
 import { Link } from "@reach/router";
 import { Redirect } from "@reach/router";
+import CHARACTERS from "../modules/Characters";
 
-
-class MyWorks extends Component {
+class Select extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      works: [],
-      redirect: false
+      redirect: false,
+      keys: Object.keys(CHARACTERS)
     }
   }
-
-  handleEdit = (workId) => {
-    localStorage.setItem("workId", workId.target.value);
-    this.setState({redirect: "edit"});
-  };
-  componentDidMount() {
-    document.title = "My Works";
-    get("/api/myworks").then((workObjs) => {
-      let reversedWorkObjs = workObjs.reverse();
-      reversedWorkObjs.map((workObj) => {
-        this.setState({ works: this.state.works.concat([workObj]) });
-      });
-    });
+  handleStartNew = (char) => {
+    sessionStorage.setItem("character", char);
+    this.setState({redirect: true});
   }
   render() {
-    console.log(this.state.works)
-    if (this.state.redirect === "color"){
-        return <Redirect push to="/draw"/>;
-      }
-    if (this.state.redirect === "edit"){
-        return <Redirect push to="/create"/>;
+    if (this.state.redirect === true){
+      return <Redirect push to="/create"/>;
     }
-    let worksList = null;
-    const hasWorks = this.state.works.length !== 0;
-    if (hasWorks) {
-      worksList = this.state.works.map((workObj) => (
-        <div>
-            <img src = {`data:image/png;base64,${workObj.data}`} alt="a"/>
-            <button
-                type="submit"
-                className="NewPostInput-button u-pointer"
-                value= {workObj.workId}
-                onClick={this.handleEdit}
-                >
-                Edit & Color
-            </button>
-        </div>
-      ));
-    } else {
-      worksList = <div>Waiting for your creativity...</div>;
-    }
-    return (
-      <div>
-        <h1>Graphiti Wall</h1>
-        {worksList}
-      </div>
-    );
-  }
+  return (
+    <div>
+    {this.state.keys.map((key) => (
+      <button
+          type="submit"
+          className="NewPostInput-button u-pointer"
+          value="Submit"
+          onClick={()=>{return this.handleStartNew(key)}}
+        >
+          <img src = {CHARACTERS[key]}/>
+        </button>
+        ))}
+    </div>
+    )
+  }  
 }
 
-export default MyWorks;
+export default Select;

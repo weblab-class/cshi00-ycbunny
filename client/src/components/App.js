@@ -4,6 +4,7 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 import Draw from "./pages/Draw.js";
+import Select from "./pages/Select.js"
 
 import "../utilities.css";
 
@@ -93,6 +94,12 @@ class App extends Component {
           />
           <MyWorks
             path="/myworks/"
+            handleLogin={this.handleLogin}
+            handleLogout={this.handleLogout}
+            userId={this.state.userId}
+          />
+          <Select
+            path="/select/"
             handleLogin={this.handleLogin}
             handleLogout={this.handleLogout}
             userId={this.state.userId}

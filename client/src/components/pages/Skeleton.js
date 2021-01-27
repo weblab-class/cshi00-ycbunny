@@ -17,9 +17,6 @@ class Skeleton extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
-    this.state = {
-      functions: []
-    };
   }
 
   componentDidMount() {
@@ -47,22 +44,6 @@ class Skeleton extends Component {
   }
 
   render() {
-    let functionsList = null;
-    const hasFunctions = this.state.functions.length !== 0;
-    if (hasFunctions) {
-      functionsList = this.state.functions.map((functionObj) => (
-        <SingleFunction
-          _id={functionObj._id}
-          creator_name={functionObj.creator_name}
-          exp={functionObj.exp}
-          leftRange={functionObj.leftRange}
-          rightRange={functionObj.rightRange}
-          deleteOldFunction={this.deleteOldFunction}
-        />
-      ));
-    } else {
-      functionsList = <div></div>;
-    }
     return (
       <>
     <div className="Grid-background">
