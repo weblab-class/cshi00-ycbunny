@@ -8,7 +8,7 @@
 .NewPostInput-input {
   flex-shrink:2;
   border: var(--darkgrey) 1px solid;
-  border-radius: var(--xs) 0 0 var(--xs);
+  border-radius: var(--xs);
   transition: box-shadow 0.1s;
 }
 
@@ -18,14 +18,40 @@
 }
 
 .NewPostInput-button {
-  color: var(--primary);
-  border: var(--primary) 1px solid;
-  border-radius: 0 var(--xs) var(--xs) 0;
+  color: var(--darkgrey);
+  border: var(--orange) 1px solid;
+  border-radius: var(--xs);
   background: none;
   transition: color 0.1s, background 0.1s;
+  margin-right: 10px;
 }
 
 .NewPostInput-button:hover {
-  color: var(--white);
-  background-color: var(--primary);
+  color: var(--darkgrey);
+  background-color: var(--orange);
+}
+
+
+.checkmark-button{
+  border: var(--lightgrey) 2px solid;
+  border-radius: 5px;
+}
+
+.checkmark-button:hover{
+  background-color: var(--orange);
+}
+
+.Function-input-box{
+  height: 30px;
+  width: 200px;
+}
+
+.Bound-input-box{
+  height: 30px;
+  width: 30px;
+}
+
+.Origin-input-box{
+  height: 30px;
+  width: 40px;
 }

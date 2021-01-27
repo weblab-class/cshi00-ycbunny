@@ -62,8 +62,9 @@ class Create extends Component {
   render() {
     return (
       <>
-       <div className="Create-title">
-        <h1>Let's start creating!</h1>
+      <div className="streamline-bar-create"/>
+       <div className="Create-top">
+        <div className="u-bold Create-title">Let's start creating!</div>
         <p>Enter math functions to draw your graphito! (yes, the singular version of graffiti is graffito) :D.</p>
        </div>
         <div className="page-layout">

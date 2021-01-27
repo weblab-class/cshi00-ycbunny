@@ -57,7 +57,7 @@ class Skeleton extends Component {
       <>
     <div className="Grid-background">
         <div className = "Graphiti-logo"/>
-        <section class="u-textCenter">
+        <section class="u-textCenter front-text u-bold">
           <p> Embrace your inner artsy, math nerd and make drawings with function graphs! Graphiti away!</p>
         </section>
         <section class="u-textCenter">

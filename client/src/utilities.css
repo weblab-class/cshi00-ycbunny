@@ -25,7 +25,8 @@
   --grey: #f7f7f7;
   --white: #fff;
   --offwhite: #fffdf6;
-  --lightgrey: #dddddd;
+  --lightgrey: #f8f3c2;
+  --orange: #f1c54f;
 
   --xs: 4px;
   --s: 8px;
@@ -80,7 +81,7 @@ form {
 }
 
 .u-bold {
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .u-textCenter {

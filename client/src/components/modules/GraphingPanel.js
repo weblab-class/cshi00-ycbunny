@@ -138,7 +138,7 @@ const math = create(all)
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
           <button
           type="submit"
-          className="NewPostInput-button u-pointer"
+          className="NewPostInput-button u-pointer u-bold"
           value="Submit"
           onClick={this.handleSave}
         >

@@ -94,7 +94,7 @@ class NewFunctionInput extends Component {
             onChange={this.expChange}
             className="Function-input-box"
           />
-          <span> x from </span>
+          <span> ; x from </span>
           <input
             type="text"
             placeholder={this.props.defaultText}
@@ -113,7 +113,7 @@ class NewFunctionInput extends Component {
         
           <button
             type="submit"
-            className="NewPostInput-button u-pointer"
+            className="checkmark-button u-pointer"
             value="Submit"
             onClick={this.handleSubmit}
           >
@@ -141,7 +141,7 @@ class NewFunctionInput extends Component {
           onChange={this.expChange}
           className="Function-input-box"
         />
-        <span> theta from </span>
+        <span> ; theta from </span>
         <input
           type="text"
           placeholder={this.props.defaultText}
@@ -157,7 +157,7 @@ class NewFunctionInput extends Component {
           onChange={this.rightRangeChange}
           className="Bound-input-box"
         />
-        <span> origin </span>
+        <span> origin: </span>
         <input
           type="text"
           placeholder="(x, y)"
@@ -167,7 +167,7 @@ class NewFunctionInput extends Component {
         />
         <button
           type="submit"
-          className="NewPostInput-button u-pointer"
+          className="checkmark-button u-pointer"
           value="Submit"
           onClick={this.handleSubmit}
         >

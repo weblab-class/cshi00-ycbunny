@@ -76,6 +76,7 @@ class Draw extends Component {
   render() {
     return (
       <div>
+        <div className="streamline-bar-create"/>
         <div className="Draw-title">
           <h1>React Canvas Draw</h1>
           <p>Try it out! Draw something, hit "Save" and then "Load".</p>
