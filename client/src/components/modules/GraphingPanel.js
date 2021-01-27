@@ -102,6 +102,7 @@ const math = create(all)
     }
     
     render () {
+      let deleteF = this.props.deleteF
       if (this.state.redirect === "next"){
         return <Redirect push to="/color/"/>;
       }
@@ -124,6 +125,9 @@ const math = create(all)
               scrollToWithContainer("s"+key+"k")
             })
           }
+          else {
+            delete dic.key
+          }
         });
         this.state.board.unsuspendUpdate()
         this.setState({
@@ -138,11 +142,15 @@ const math = create(all)
         let newCurve = this.props.functions.filter((functionObj) => (this.curveDic[functionObj._id]==null));
         let remove = currentCurves.filter(f => !newCurves.includes(f))
         if (newCurve !== null && newCurve.length !== 0){
-          let c = this.create(newCurve[0]);
+          let c = this.create(newCurve[0], newCurve[0]._id);
           let changePosition = this.props.changePosition
           if (c!= null){ c.on('mousedown', function () {
             changePosition(newCurve[0]._id)
-          });
+          })
+          }
+          else {
+              delete this.c
+              
           }
         }
         else if (remove !== null && remove.length !== 0) {

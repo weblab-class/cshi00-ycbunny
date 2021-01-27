@@ -36,6 +36,7 @@ class SingleFunction extends Component {
 
 
   render() {
+    try {
     if (this.props.mode === "cartesian"){
       let tex = math.parse("y = "+this.props.exp).toTex()
       return(
@@ -71,6 +72,10 @@ class SingleFunction extends Component {
       </div>
       )
     };
+  }
+  catch{
+    return (<div></div>)
+  }
   }
 }
 
