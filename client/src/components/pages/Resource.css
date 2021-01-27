@@ -1,6 +1,6 @@
 .Resource-graph{
-    border: var(--lightgrey) 2px solid;
-    border-radius: var(--s);
+    border: var(--lightgrey) 5px solid;
+    border-radius: 5px;
     margin: var(--l);
 }
 
