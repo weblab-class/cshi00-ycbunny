@@ -148,10 +148,14 @@ const math = create(all)
         <>
           <div id={this.id} className={'jxgbox ' + this.props.className} style={style} />
           <button
+<<<<<<< HEAD
           type="submit"
           className="NewPostInput-button u-pointer u-bold restart "
           value="Submit"
           onClick={this.handleRestart}
+=======
+          className="restart-pos NewPostInput-button u-pointer u-bold"
+>>>>>>> 72c55a4c31802128a4b99df8ebb1980a8f5a7529
           >
             Restart
           </button>

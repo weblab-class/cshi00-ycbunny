@@ -1,11 +1,11 @@
 .SingleFunction-button{
     border: var(--lightgrey) 2px solid;
     border-radius: 5px;
+    font-size: 20px;
 }
 
 .SingleFunction-button:hover{
     background-color: var(--orange);
-    font-size: 20px;
   }
 
 .Each-function{
