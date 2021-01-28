@@ -25,7 +25,10 @@ class FinishedWorks extends Component {
   
 
   handleDelete = (event) => {
-    event.preventDefault();
+    this.setState({
+      works: this.state.works.filter((work) => (
+        work._id!=event.target.value))
+    });
     post("/api/worksdelete", {id: event.target.value});
   };
 

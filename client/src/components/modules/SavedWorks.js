@@ -23,7 +23,10 @@ class SavedWorks extends Component {
   };
 
   handleDelete = (event) => {
-    event.preventDefault();
+    this.setState({
+      works: this.state.works.filter((work) => (
+        work.workId!=event.target.value))
+    });
     post("/api/sdelete", {workId: event.target.value});
   };
 
