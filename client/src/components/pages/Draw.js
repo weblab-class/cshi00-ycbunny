@@ -83,7 +83,7 @@ class Draw extends Component {
     const arr = new Uint8Array(buf);
 
     post("/api/publish", {image: dataUri});
-    return { dataUri: dataUri };
+    this.setState({redirect: "gallery"});
   }
 
 
@@ -102,8 +102,11 @@ class Draw extends Component {
   }
 
   render() {
-    if (this.state.redirect === true){
+    if (this.state.redirect === "back"){
       return <Redirect push to={"/graph/"}/>
+    }
+    if (this.state.redirect === "gallery"){
+      return <Redirect push to={"/gallery/"}/>
     }
     return (
       <div>
@@ -184,7 +187,7 @@ class Draw extends Component {
         <button
           className = "Draw-button"
           onClick={() => {
-            this.setState({redirect: true})}}
+            this.setState({redirect: "back"})}}
         > Back
         </button> 
         <button
