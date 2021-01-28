@@ -61,6 +61,7 @@ class Draw extends Component {
   uploadd = (canvasRef) => {
     localStorage.setItem('character', '');
     localStorage.setItem('progress', "/select/");
+    localStorage.setItem('savedDrawing', "");
     const width = canvasRef.props.canvasWidth;
     const height = canvasRef.props.canvasHeight;
     const background = canvasRef.canvasContainer.children[3]; 
