@@ -1,0 +1,20 @@
+.Mywork-titletext{
+    padding-left: var(--m);
+    padding-bottom: var(--s);
+}
+
+.Draft-container{
+    width: 500px;
+    height: 100%;
+    border: var(--lightgrey) 5px solid;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.Saved-container{
+    border: var(--lightgrey) 5px solid;
+    border-radius: 5px;
+    margin: 10px;
+    width: auto;
+    height: auto;
+}

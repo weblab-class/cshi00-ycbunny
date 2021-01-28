@@ -45,11 +45,12 @@ class SavedWorks extends Component {
     const hasWorks = this.state.works.length !== 0;
     if (hasWorks) {
       worksList = this.state.works.map((workObj) => (
-        <div>
+        <div className="Saved-container">
             <img src = {`data:image/png;base64,${workObj.data}`} alt="a"/>
+            <div>
             <button
                 type="submit"
-                className="NewPostInput-button u-pointer"
+                className="NewPostInput-button u-pointer u-bold"
                 value= {[workObj.workId, workObj.character]}
                 onClick={this.handleEdit}
                 >
@@ -57,23 +58,24 @@ class SavedWorks extends Component {
             </button>
             <button
                 type="submit"
-                className="NewPostInput-button u-pointer"
+                className="NewPostInput-button u-pointer u-bold"
                 value= {workObj.workId}
                 onClick={this.handleDelete}
                 >
                 Delete
             </button>
+            </div>
         </div>
       ));
     } else {
-      worksList = <div>Waiting for your creativity...</div>;
+      worksList = <div className="Mywork-titletext">Waiting for your creativity...</div>;
     }
     return (
       <div>
         <div className="Mywork-titletext">
         <h1>Saved Graphs</h1>
         </div>
-        <div className="u-flex"> 
+        <div className="u-flex-justifyCenter u-flex u-flexWrap"> 
         {worksList}
         </div>
       </div>

@@ -34,11 +34,11 @@ class FinishedWorks extends Component {
     const hasWorks = this.state.works.length !== 0;
     if (hasWorks) {
       worksList = this.state.works.map((workObj) => (
-        <div>
+        <div className="Draft-container">
             <img src = {`data:image/png;base64,${workObj.data}`} alt="a"/>
             <button
                 type="submit"
-                className="NewPostInput-button u-pointer"
+                className="NewPostInput-button u-pointer u-bold"
                 value= {workObj._id}
                 onClick={this.handleDelete}
                 >
@@ -47,14 +47,14 @@ class FinishedWorks extends Component {
         </div>
       ));
     } else {
-      worksList = <div>Waiting for your creativity...</div>;
+      worksList = <div className="Mywork-titletext">Waiting for your creativity...</div>;
     }
     return (
-      <div >
+      <div>
         <div className="Mywork-titletext">
         <h1>Finished Graphiti</h1>
         </div>
-        <div className="u-flex">
+        <div className="u-flex-justifyCenter u-flex u-flexWrap">
         {worksList}
         </div>
       </div>
